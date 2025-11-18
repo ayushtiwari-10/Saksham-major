@@ -1,0 +1,100 @@
+/* Student Dashboard — Saksham theme (clean & responsive) */
+
+:root{
+  --bg: #fffaf3;
+  --panel: #fff;
+  --accent: #004d40;
+  --accent-2: #2fa874;
+  --muted: #f6ead8;
+  --card-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  --radius: 12px;
+  --font: "Poppins", sans-serif;
+  --serif: "Georgia", serif;
+}
+
+*{box-sizing:border-box}
+body{font-family:var(--font); background:var(--bg); margin:0; color:#222}
+
+/* root layout */
+.student-root{ display:flex; min-height:100vh }
+.saksham-sidebar{ width:220px; padding:28px 18px; border-right:1px solid rgba(0,0,0,0.04) }
+.student-main{ flex:1; display:flex; flex-direction:column }
+
+/* topbar reuse styles from global Topbar (no duplication here) */
+
+/* main content */
+.student-content{ display:flex; gap:24px; padding:20px 36px; align-items:flex-start }
+
+/* LEFT - stats */
+.student-left{ width:260px; display:flex; flex-direction:column; gap:14px }
+.stat-card{ background:var(--panel); border-radius:12px; padding:14px; box-shadow:var(--card-shadow) }
+.stat-card h4{ margin:0; font-size:14px; color:#555 }
+.stat-value{ font-size:22px; font-weight:800; margin-top:8px; color:var(--accent) }
+.stat-sub{ margin:0; color:#666; font-size:13px; margin-top:6px }
+
+/* upcoming */
+.upcoming{ background:var(--panel); padding:12px; border-radius:12px; box-shadow:var(--card-shadow) }
+.upcoming h4{ margin:0 0 8px 0 }
+.upcoming ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px }
+.upcoming li{ background:#fff; padding:8px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 6px 12px rgba(0,0,0,0.04) }
+.upcoming li strong{ font-size:13px }
+
+/* CENTER - enrolled */
+.student-center{ flex:1; display:flex; flex-direction:column; gap:12px }
+.center-header{ display:flex; justify-content:space-between; align-items:center }
+.center-header h3{ margin:0; font-family:var(--serif); font-size:20px }
+.center-actions input{ padding:10px 12px; border-radius:10px; border:1px solid #e9e0d3; width:320px; background:#fff5e7 }
+
+/* course grid */
+.course-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:16px }
+
+/* enrolled card (wraps CourseCard) */
+.enrolled-card{ display:flex; flex-direction:column; gap:8px }
+.enrolled-actions{ display:flex; gap:8px; align-items:center }
+
+/* CourseCard styles */
+.course-card{ background:var(--panel); border-radius:12px; overflow:hidden; box-shadow:var(--card-shadow); cursor:pointer; display:flex; flex-direction:column; transition: transform .14s ease }
+.course-card:hover{ transform: translateY(-6px) }
+.course-thumb{ height:140px; background-size:cover; background-position:center }
+.course-body{ padding:12px; display:flex; flex-direction:column; gap:8px }
+.course-body h4{ margin:0; font-family:var(--serif); font-size:16px }
+.progress-line{ height:8px; background:#eee; border-radius:8px; overflow:hidden }
+.progress-fill{ height:100%; background:linear-gradient(90deg,var(--accent-2),#077a59); width:30% }
+
+/* RIGHT - recommendations */
+.student-right{ width:340px; display:flex; flex-direction:column; gap:12px }
+.rec-header h4{ margin:0; font-size:16px }
+.rec-header .muted{ color:#666; font-size:13px }
+.rec-list{ display:flex; flex-direction:column; gap:12px }
+.rec-item{ display:flex; gap:10px; background:var(--panel); padding:10px; border-radius:10px; box-shadow:var(--card-shadow); align-items:center }
+.rec-item img{ width:80px; height:56px; object-fit:cover; border-radius:8px }
+.rec-body strong{ display:block; font-size:14px }
+.rec-meta small{ color:#777 }
+.rec-actions{ display:flex; gap:8px; margin-top:8px }
+.btn.small{ padding:8px 10px; border-radius:8px; border:none; cursor:pointer; font-weight:700 }
+.btn.primary{ background:var(--accent-2); color:#fff }
+.btn.ghost{ background:#fff; border:1px solid #ddd }
+
+/* help card */
+.help-card{ background:var(--panel); padding:12px; border-radius:10px; box-shadow:var(--card-shadow) }
+.help-card h5{ margin:0; font-size:15px }
+
+/* empty */
+.empty{ padding:24px; background:#fff; border-radius:12px; box-shadow:var(--card-shadow); text-align:center; color:#666 }
+
+/* responsive */
+@media (max-width: 980px) {
+  .saksham-sidebar{ display:none }
+  .student-content{ padding:14px; flex-direction:column }
+  .student-left{ width:100% }
+  .student-right{ width:100% }
+  .course-grid{ grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) }
+}
+@media (max-width: 600px) {
+  .center-actions input{ width:100% }
+}
+    .course-grid{ grid-template-columns: 1fr }
+@media (max-width: 400px) {
+    .stat-card{ text-align:center }
+    }
+     

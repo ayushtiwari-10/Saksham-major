@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.connect-section {
+  background: #ffffff;
+  padding: 100px 80px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.connect-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin-bottom: 80px;
+}
+
+.connect-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.connect-text h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e4e3d;
+  margin-bottom: 20px;
+}
+
+.connect-text p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 25px;
+  max-width: 500px;
+}
+
+.join-btn {
+  background-color: #248b61;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.join-btn:hover {
+  background-color: #1f6f50;
+}
+
+.connect-image {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.connect-image img {
+  width: 90%;
+  max-width: 450px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.connect-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.connect-card {
+  background-color: #f5f9f7;
+  border-radius: 20px;
+  width: 280px;
+  text-align: center;
+  padding: 40px 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.connect-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.connect-card img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+.connect-card h3 {
+  font-size: 1.2rem;
+  color: #248b61;
+  margin-bottom: 10px;
+}
+
+.connect-card p {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .connect-section {
+    padding: 70px 40px;
+  }
+
+  .connect-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .connect-cards {
+    gap: 25px;
+  }
+}

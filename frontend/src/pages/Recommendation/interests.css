@@ -1,0 +1,88 @@
+.interests-container {
+  padding: 60px;
+  background-color: #fffaf3;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #004d40;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: 10px;
+  color: #555;
+  font-size: 16px;
+}
+
+.grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 35px 25px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0, 137, 123, 0.25);
+}
+
+.card.selected {
+  border-color: #00897b;
+  background-color: #e0f7f4;
+  box-shadow: 0 6px 15px rgba(0, 137, 123, 0.3);
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+}
+
+.continue-btn {
+  margin-top: 50px;
+  width: 250px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 14px;
+  background: #004d40;
+  color: white;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.continue-btn:disabled {
+  background: #9e9e9e;
+  cursor: not-allowed;
+}
+
+.continue-btn:hover:not(:disabled) {
+  background: #00695c;
+  transform: translateY(-2px);
+}

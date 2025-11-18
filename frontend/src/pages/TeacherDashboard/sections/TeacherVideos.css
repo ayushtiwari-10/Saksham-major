@@ -1,0 +1,117 @@
+/* Teacher Videos page styles - TeacherVideos.css
+   Consistent with the Saksham theme and other teacher pages.
+*/
+
+:root{
+  --bg: #fffaf3;
+  --panel: #fff;
+  --accent: #004d40;
+  --green: #2fa874;
+  --muted: #e9dcca;
+  --card-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  --radius: 12px;
+  --font: "Poppins", sans-serif;
+  --serif: "Georgia", serif;
+}
+
+.teacher-root{ display:flex; min-height:100vh; font-family:var(--font) }
+.saksham-sidebar{ width:220px; padding:28px 18px; border-right: 1px solid rgba(0,0,0,0.03) }
+.teacher-main{ flex:1; display:flex; flex-direction:column }
+
+/* page container */
+.tv-page{ padding:22px 36px; display:flex; flex-direction:column; gap:18px }
+
+/* top controls: tabs + search */
+.tv-controls{ display:flex; align-items:center; justify-content:space-between; gap:18px }
+.tv-tabs{ display:flex; gap:12px }
+.tab{
+  padding:10px 18px; border-radius:12px; border:none; font-weight:700; cursor:pointer;
+  background:linear-gradient(180deg,#f0f0f0,#e7e7e7); box-shadow: 0 3px 6px rgba(0,0,0,0.03)
+}
+.tab.active{ background:linear-gradient(180deg,#cfeef0,#b7f0df); color:var(--accent); transform:translateY(-1px) }
+
+.tv-search input{ padding:10px 12px; border-radius:10px; border:1px solid #efe6db; background:#fff5e7; width:360px }
+
+/* grid layout */
+.tv-grid-wrap{ display:flex; flex-direction:column; gap:12px }
+.tv-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap:18px;
+}
+
+/* card (reused by VideoCard) */
+.tv-card{ background:var(--panel); border-radius:12px; overflow:hidden; box-shadow: var(--card-shadow); display:flex; flex-direction:column; }
+.tv-thumb{ height:140px; background-size:cover; background-position:center }
+.tv-body{ padding:12px; display:flex; flex-direction:column; gap:8px }
+.tv-row{ display:flex; justify-content:space-between; align-items:center; gap:8px }
+.tv-title{ margin:0; font-family:var(--serif); font-size:16px }
+.badge{ text-transform:capitalize; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700 }
+.badge.pub{ background:linear-gradient(90deg,#e8f8f0,#cff2e6); color:#08704a }
+.badge.draft{ background:#f2f2f2; color:#555 }
+
+.tv-meta{ font-size:13px; color:#666; display:flex; gap:8px; align-items:center }
+.tv-progress{ display:flex; align-items:center; gap:8px }
+.tv-progress-bar{ height:8px; background:linear-gradient(90deg,var(--green),#0b8c5a); border-radius:8px; width:30%; box-shadow:inset 0 -2px 4px rgba(0,0,0,0.06) }
+.tv-actions{ display:flex; gap:8px; margin-top:6px }
+.btn-sm{ padding:8px 10px; border-radius:8px; border:none; cursor:pointer; font-weight:700; background:#2fa874; color:#fff }
+.btn-sm.ghost{ background:#fff; border:1px solid #ddd; color:#444 }
+.btn-sm.danger{ background:#ff6b6b; color:#fff }
+
+.tv-publish{ display:flex; align-items:center; gap:8px; margin-top:8px }
+
+/* toggle switch */
+.switch{ position:relative; display:inline-block; width:44px; height:24px; }
+.switch input{ display:none }
+.slider{ position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:#ccc; transition:.2s; border-radius:28px }
+.slider:before{ position:absolute; content:""; height:18px; width:18px; left:3px; top:3px; background:white; border-radius:50%; transition:.2s; }
+.switch input:checked + .slider{ background:linear-gradient(90deg,#2fa874,#0b8c5a) }
+.switch input:checked + .slider:before{ transform:translateX(20px) }
+
+.publish-text{ font-size:12px; color:#666; margin-left:6px }
+
+/* CREATE form */
+.tv-create{ background:transparent }
+.create-form{ background:var(--panel); padding:18px; border-radius:12px; box-shadow:var(--card-shadow); max-width:900px }
+.form-row{ display:flex; flex-direction:column; gap:8px; margin-bottom:12px }
+.form-row.cols{ display:flex; gap:18px }
+.form-row.cols > div{ flex:1 }
+.form-row label{ font-weight:700; font-size:13px }
+.create-form input[type="text"], .create-form input[type="file"], .create-form textarea{
+  padding:10px 12px; border-radius:8px; border:1px solid #e9e1d3; background:#fff;
+}
+.create-form textarea{ min-height:120px; resize:vertical }
+.thumb-preview{ width:180px; height:100px; object-fit:cover; margin-top:8px; border-radius:8px; }
+
+/* form actions */
+.form-actions{ display:flex; gap:12px; margin-top:6px }
+.btn{ padding:10px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:700 }
+.btn.primary{ background:var(--green); color:#fff }
+.btn.ghost{ background:#fff; border:1px solid #ddd }
+
+/* empty state */
+.empty{ padding:28px; background:#fff; border-radius:10px; box-shadow:var(--card-shadow); color:#666; text-align:center }
+
+/* responsive */
+@media (max-width: 980px){
+  .saksham-sidebar{ display:none }
+  .tv-grid{ grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); }
+  .tv-controls{ flex-direction:column; align-items:flex-start }
+  .tv-search input{ width:100% }
+  .form-row.cols{ flex-direction:column }
+}
+@media (max-width: 600px){
+  .tv-grid{ grid-template-columns: 1fr; }
+}
+@media (max-width: 400px){
+  .tab{ padding:8px 12px; font-size:14px }
+}
+@media (max-width: 350px){
+  .tv-search input{ width:100%; font-size:14px }
+}
+@media (max-width: 300px){
+  .btn-sm{ padding:6px 8px; font-size:12px }
+}
+@media (max-width: 250px){
+  .tv-thumb{ height:120px }
+}

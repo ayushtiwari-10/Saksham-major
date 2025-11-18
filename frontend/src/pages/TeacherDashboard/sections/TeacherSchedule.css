@@ -1,0 +1,93 @@
+/* Teacher Schedule page styles - TeacherSchedule.css
+   Keep matching theme variables from TeacherDashboard.css
+*/
+
+:root{
+  --bg: #fffaf3;
+  --panel: #fff;
+  --accent: #004d40;
+  --muted: #e9dcca;
+  --card-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  --font: "Poppins", sans-serif;
+  --serif: "Georgia", serif;
+}
+
+.teacher-root { display:flex; min-height:100vh; font-family:var(--font) }
+.saksham-sidebar { width:220px; padding:28px 18px; border-right: 1px solid rgba(0,0,0,0.03); background:transparent }
+
+/* main container style reused from Topbar component */
+.teacher-main{ flex:1; display:flex; flex-direction:column }
+.saksham-topbar{ display:flex; justify-content:space-between; align-items:center; padding:22px 28px; background:transparent }
+.page-title{ font-family:var(--serif); font-size:28px; margin:0 }
+
+/* schedule content layout */
+.schedule-content { display:flex; gap:24px; padding:18px 36px; align-items:flex-start }
+
+/* mini calendar (left) */
+.mini-calendar {
+  width:260px;
+  background:transparent;
+  padding:12px;
+}
+.cal-header { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px }
+.cal-nav { border:none; background:#fff; padding:6px 10px; border-radius:8px; cursor:pointer; box-shadow:var(--card-shadow) }
+.cal-title { font-weight:700 }
+
+.cal-grid { display:grid; grid-template-columns: repeat(7, 1fr); gap:6px; background:transparent }
+.cal-weekday { text-align:center; font-size:12px; color:#666; padding:6px 0 }
+.cal-cell { min-height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer; background:#fff; border:1px solid #f0e8df }
+.cal-cell.today { border:2px dashed #caa77a }
+.cal-cell.selected { background: linear-gradient(180deg,#f7e9d9,#f2dfc4); box-shadow:var(--card-shadow) }
+.cal-cell.has-events { box-shadow: inset 0 -4px 8px rgba(0,160,120,0.06) }
+
+.mini-actions { display:flex; gap:8px; margin-top:8px }
+.btn.small { padding:8px 10px; border-radius:8px; border:1px solid #ddd; background:#fff; cursor:pointer }
+
+/* center timeline */
+.timeline { flex:1.2; background:transparent; padding:6px 12px }
+.timeline-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px }
+.timeline-header h3 { margin:0; font-family:var(--serif); font-size:20px }
+.timeline-list { display:flex; flex-direction:column; gap:12px; padding-bottom:60px }
+
+.time-item { display:flex; gap:12px; align-items:flex-start; background:#fff; padding:12px; border-radius:10px; box-shadow:var(--card-shadow) }
+.time-left { width:90px; font-weight:700; color:#444 }
+.time-body { flex:1; display:flex; justify-content:space-between; align-items:center }
+.time-title { font-weight:700 }
+.time-controls .tiny { background:transparent; border:1px solid #ddd; padding:6px 8px; border-radius:8px; cursor:pointer; margin-left:8px }
+.time-controls .tiny.danger { border-color:#ff6b6b; color:#b33 }
+
+/* empty message */
+.empty { padding:18px; background:#fff; border-radius:12px; box-shadow:var(--card-shadow); color:#666 }
+
+/* week grid (right) */
+.week-grid { width:420px; background:transparent; padding:8px 12px; display:flex; flex-direction:column; gap:10px }
+.week-header { display:flex; justify-content:space-between; align-items:center; gap:10px }
+.week-header .mini-search input { padding:8px 10px; border-radius:8px; border:1px solid #e6d9c8; background:#fff5e7; width:220px }
+
+.week-grid-inner { background:transparent; border-radius:10px; overflow:hidden }
+.week-days { display:flex; gap:8px; margin-bottom:10px }
+.week-day-col { background:#fff; border-radius:8px; padding:8px; flex:1; box-shadow:var(--card-shadow) }
+.week-day-title { font-weight:700; margin-bottom:8px }
+.day-events { display:flex; flex-direction:column; gap:6px }
+.week-event { background:linear-gradient(90deg,#ffd3a6,#f1caa0); padding:6px 8px; border-radius:8px; font-size:13px }
+
+/* visual time grid */
+.week-time-grid { margin-top:8px; display:flex; flex-direction:column; gap:8px; background:transparent }
+.hour-row { display:flex; gap:12px; align-items:center }
+.hour-label { width:48px; color:#777; text-align:right; font-size:12px }
+.hour-slot { flex:1; height:28px; background:#fff; border-radius:8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03) }
+
+/* responsive */
+@media (max-width: 980px){
+  .saksham-sidebar{ display:none }
+  .schedule-content { flex-direction:column; gap:12px }
+  .week-grid{ width:100% }
+}
+@media (max-width: 600px){
+  .mini-calendar{ width:100% }
+  .timeline{ width:100% }
+}
+@media (max-width: 400px){
+  .cal-header h4{ font-size:16px }
+  .week-header .mini-search input{ width:150px }
+}

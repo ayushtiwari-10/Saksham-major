@@ -1,0 +1,46 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fffdf8;
+  padding: 1.2rem 4rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar-logo {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: "Noto Serif Devanagari", serif;
+  color: #111;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  background-color: #d9d9d9;
+  padding: 0.6rem 2rem;
+  border-radius: 20px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.get-started {
+  background-color: #2e8b6d;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.get-started:hover {
+  background-color: #25755b;
+}

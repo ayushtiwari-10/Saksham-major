@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.mission-section {
+  background-color: #f6f9f7;
+  padding: 100px 80px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.mission-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.mission-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.mission-text h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e4e3d;
+  margin-bottom: 25px;
+}
+
+.mission-text p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.mission-text b {
+  color: #248b61;
+}
+
+.mission-image {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.mission-image img {
+  width: 90%;
+  max-width: 450px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease;
+}
+
+.mission-image img:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 900px) {
+  .mission-section {
+    padding: 60px 40px;
+  }
+
+  .mission-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .mission-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .mission-image img {
+    width: 100%;
+    max-width: 400px;
+  }
+}

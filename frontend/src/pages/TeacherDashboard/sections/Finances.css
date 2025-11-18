@@ -1,0 +1,160 @@
+.finance-container {
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Summary Cards */
+.finance-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 20px;
+}
+
+.f-card {
+  background: var(--panel);
+  padding: 22px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: 0.2s;
+}
+
+.f-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.f-card h3 {
+  margin: 0;
+  font-size: 26px;
+  color: var(--accent-3);
+}
+
+.f-card p {
+  margin: 8px 0 0;
+  color: #444;
+}
+
+/* Chart Placeholder */
+.chart-section {
+  background: var(--panel);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.chart-placeholder {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--muted);
+  border-radius: 12px;
+  font-size: 20px;
+  color: #555;
+}
+
+/* Payment Table */
+.payment-table-section {
+  background: var(--panel);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.payment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.payment-table th,
+.payment-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+  font-size: 15px;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.status.paid {
+  background: #c8f6d2;
+  color: #046d2b;
+}
+
+.status.pending {
+  background: #ffe4b5;
+  color: #b36b00;
+}
+
+/* Payout Section */
+.payout-section {
+  background: var(--panel);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.payout-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.payout-btn {
+  background: linear-gradient(180deg, #2fa874, #077a59);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.payout-btn:hover {
+  opacity: 0.9;
+}
+
+/* Expense Section */
+.expense-section {
+  background: var(--panel);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.expense-section ul {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  color: #444;
+}
+.expense-section li {
+  margin-bottom: 6px;
+}
+.chart-wrapper {
+  width: 100%;
+  height: 280px;
+  margin-top: 10px;
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 10px;
+}
+.chart-canvas {
+  width: 100%;
+  height: 100%;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .finance-cards {
+    grid-template-columns: 1fr;
+  }
+}

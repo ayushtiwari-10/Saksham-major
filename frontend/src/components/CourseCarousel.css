@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.carousel-section {
+  background-color: #fffdf6;
+  text-align: center;
+  padding: 70px 50px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.carousel-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.carousel-subtext {
+  color: #333;
+  font-size: 0.95rem;
+  max-width: 700px;
+  margin: 0 auto 40px auto;
+  line-height: 1.6;
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 25px;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+}
+
+.carousel-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel-container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.course-card {
+  min-width: 250px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+}
+
+.course-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.course-info {
+  padding: 10px;
+}
+
+.course-info h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.view-btn {
+  background-color: #248b61;
+  color: white;
+  border: none;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-btn:hover {
+  background-color: #1d6f4f;
+}
+
+.view-all-container {
+  margin-top: 40px;
+}
+
+.view-all-btn {
+  background-color: #248b61;
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 10px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-all-btn:hover {
+  background-color: #1d6f4f;
+}
+
+@media (max-width: 768px) {
+  .carousel-title {
+    font-size: 1.6rem;
+  }
+
+  .carousel-container {
+    gap: 15px;
+  }
+
+  .course-card {
+    min-width: 200px;
+  }
+}
