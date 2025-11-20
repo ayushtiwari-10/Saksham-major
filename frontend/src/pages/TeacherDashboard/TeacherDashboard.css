@@ -428,6 +428,56 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-wrapper {
+  position: relative;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  width: 180px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  z-index: 9999;
+}
+
+.profile-dropdown h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.profile-dropdown button {
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.profile-dropdown button:hover {
+  background: #f3f3f3;
+}
+
+.profile-dropdown .logout {
+  color: red;
+}
+
 @media (max-width: 600px) {
   .classes-grid {
     grid-template-columns: 1fr;

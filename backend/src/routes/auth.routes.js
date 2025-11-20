@@ -1,11 +1,12 @@
 // src/routes/auth.routes.js
-const express = require("express");
-const router = express.Router();
-const { signup, login, me } = require("../controllers/auth.controller");
-const authMiddleware = require("../middleware/auth.middleware");
+const express = require('express');
+const { signup, login, me } = require('../controllers/auth.controller');
+const requireAuth = require('../middleware/auth.middleware');
 
-router.post("/signup", signup);
-router.post("/login", login);
-router.get("/me", authMiddleware, me);
+const router = express.Router();
+
+router.post('/signup', signup);
+router.post('/login', login);
+router.get('/me', requireAuth, me);
 
 module.exports = router;

@@ -1,32 +1,16 @@
-const mongoose = require('mongoose');
+// backend/src/models/class.model.js
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const classSchema = new mongoose.Schema({
-  course: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Course',
-    required: true,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-  },
-  date: {
-    type: Date,
-    required: true,
-  },
-  duration: {
-    type: Number, // in minutes
-    required: true,
-  },
-  maxStudents: {
-    type: Number,
-    required: true,
-  },
-}, {
-  timestamps: true,
-});
+const ClassSchema = new Schema({
+  title: { type: String, required: true, trim: true },
+  description: { type: String, trim: true, default: "" },
+  image: { type: String, trim: true, default: "" }, // store image URL (Cloudinary or uploaded)
+  price: { type: Number, default: 0 },
+  category: { type: String, trim: true, default: "General" },
+  instructor: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  date: { type: Date },
+  time: { type: String },
+}, { timestamps: true });
 
-module.exports = mongoose.model('Class', classSchema);
+module.exports = mongoose.model("Class", ClassSchema);

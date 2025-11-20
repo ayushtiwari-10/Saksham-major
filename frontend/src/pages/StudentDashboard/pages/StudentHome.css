@@ -1,0 +1,349 @@
+/* ROOT WRAPPER */
+.student-shell {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: #faf9f6;
+}
+
+.student-main {
+  flex: 1;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* MAIN CONTENT AREA */
+.student-content {
+  padding: 22px 32px;
+}
+
+/* ------------------------------------------------------------ */
+/* BANNER */
+/* ------------------------------------------------------------ */
+.student-banner {
+  width: 100%;
+  background: linear-gradient(180deg, #ffffff, #fffdf9);
+  border-radius: 16px;
+  padding: 22px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #f1ece3;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.welcome-circle {
+  width: 48px;
+  height: 48px;
+  background: #2fa874;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.student-banner h1 {
+  margin: 0;
+  font-family: "Georgia", serif;
+  font-size: 26px;
+}
+
+.muted {
+  font-size: 14px;
+  color: #8e8e8e;
+}
+
+/* Stats card */
+.stats-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  gap: 20px;
+  border: 1px solid #f0ebe5;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat .num {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.stat .label {
+  color: #777;
+  font-size: 13px;
+}
+
+/* ------------------------------------------------------------ */
+/* Tabs + Filters */
+/* ------------------------------------------------------------ */
+.tabs-row {
+  margin-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chips {
+  display: flex;
+  gap: 12px;
+}
+
+.chip {
+  padding: 8px 18px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.chip.active {
+  background: #2fa874;
+  color: #fff;
+  border-color: #2fa874;
+}
+
+.course-filter {
+  display: flex;
+  gap: 10px;
+}
+
+.pill {
+  padding: 7px 16px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.pill.active {
+  background: #1e7d50;
+  color: #fff;
+}
+
+/* ------------------------------------------------------------ */
+/* Course Grid */
+/* ------------------------------------------------------------ */
+.course-grid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.class-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.05);
+}
+
+.card-top {
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-body {
+  padding: 14px 16px;
+}
+
+.card-body h4 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: "Georgia", serif;
+}
+
+.meta-row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.students {
+  font-size: 14px;
+  color: #555;
+}
+
+.progress-mini {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-track {
+  width: 70px;
+  height: 6px;
+  border-radius: 8px;
+  background: #eaeaea;
+}
+
+.progress-value {
+  height: 6px;
+  border-radius: 8px;
+  background: #2fa874;
+}
+
+.card-actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+}
+
+.btn.primary {
+  background: #2fa874;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background: #1e7d50;
+}
+
+.btn.ghost {
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.btn.ghost:hover {
+  background: #f9f9f9;
+}
+
+/* ------------------------------------------------------------ */
+/* Recommended Scroll */
+/* ------------------------------------------------------------ */
+.section-title {
+  margin-top: 34px;
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-family: "Georgia", serif;
+}
+
+.recommended-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.recommended-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.recommended-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 8px;
+}
+
+.rec-card {
+  min-width: 180px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+}
+
+.rec-img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.rec-title {
+  margin-top: 8px;
+  font-weight: 700;
+  font-family: "Georgia", serif;
+}
+
+/* ------------------------------------------------------------ */
+/* Offline Nearby */
+/* ------------------------------------------------------------ */
+.offline-list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.offline-item {
+  background: #fff;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.offline-thumb {
+  width: 70px;
+  height: 70px;
+  border-radius: 14px;
+  background: #e5e5e5;
+}
+
+.offline-title {
+  font-weight: 700;
+  font-family: "Georgia", serif;
+}
+
+/* ------------------------------------------------------------ */
+/* Bottom Search / Social Row */
+/* ------------------------------------------------------------ */
+.bottom-tools {
+  margin-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-search {
+  width: 260px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.social-group {
+  display: flex;
+  gap: 12px;
+}
+
+.social {
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  width: 34px;
+  height: 34px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.social.small {
+  font-size: 15px;
+}

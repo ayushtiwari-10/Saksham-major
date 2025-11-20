@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
 import Topbar from "../../../components/Topbar";
 import VideoCard from "../../../components/VideoCard";
+import { authService } from "../../../services/auth.service";
 import "./TeacherVideos.css";
 
 /**
@@ -39,7 +40,28 @@ const sampleVideos = [
 const TeacherVideos = () => {
   const navigate = useNavigate();
   const [active, setActive] = useState("myvideos"); // myvideos | create
+
   const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await authService.get('/teacher/videos');
+        setVideos(data);
+      } catch (err) {
+        console.error('Error fetching videos:', err);
+        setError('Failed to load videos');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVideos();
+  }, []);
+
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -60,20 +82,22 @@ const TeacherVideos = () => {
     navigate(routes[section] || "/teacher/dashboard");
   };
 
-  useEffect(() => {
-    // TODO: replace with API call: GET /api/teacher/videos
-    setVideos(sampleVideos);
-  }, []);
+
 
   const handleEdit = (id) => {
     alert("Edit " + id + " (open modal / navigate to editor).");
     // TODO: open editor page or modal
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (!window.confirm("Delete this video?")) return;
-    setVideos((p) => p.filter((v) => v.id !== id));
-    // TODO: DELETE request to backend
+    try {
+      await authService.delete(`/teacher/videos/${id}`);
+      setVideos((p) => p.filter((v) => v.id !== id));
+    } catch (err) {
+      console.error('Error deleting video:', err);
+      alert('Failed to delete video');
+    }
   };
 
   const handleAnalytics = (id) => {
@@ -81,9 +105,14 @@ const TeacherVideos = () => {
     // TODO: navigate to analytics dashboard
   };
 
-  const handleTogglePublish = (id) => {
-    setVideos((p) => p.map((v) => (v.id === id ? { ...v, status: v.status === "published" ? "draft" : "published" } : v)));
-    // TODO: PATCH backend: /api/teacher/videos/:id/publish
+  const handleTogglePublish = async (id) => {
+    try {
+      const response = await authService.put(`/teacher/videos/${id}`, { status: 'toggle' });
+      setVideos((p) => p.map((v) => (v.id === id ? response : v)));
+    } catch (err) {
+      console.error('Error toggling publish:', err);
+      alert('Failed to toggle publish status');
+    }
   };
 
   // Create form handlers
@@ -97,7 +126,7 @@ const TeacherVideos = () => {
     }
   };
 
-  const handleUpload = (e) => {
+  const handleUpload = async (e) => {
     e.preventDefault();
     if (!form.title || !form.videoFile) return alert("Please provide a title and a video file.");
     // Build FormData and POST to backend
@@ -108,24 +137,19 @@ const TeacherVideos = () => {
     if (form.thumbnailFile) fd.append("thumbnail", form.thumbnailFile);
     fd.append("video", form.videoFile);
 
-    // TODO: POST /api/teacher/videos (Authorization header)
-    // Example:
-    // fetch('/api/teacher/videos',{ method: 'POST', headers: { Authorization: 'Bearer ' + token }, body: fd })
-    //   .then(res=>res.json()).then(newVideo => setVideos(p=>[newVideo,...p]))
-
-    // For demo: add to local list
-    const newV = {
-      id: Date.now().toString(),
-      title: form.title,
-      thumbnail: form.thumbnailPreview || "https://via.placeholder.com/600x350",
-      status: "draft",
-      progress: 0,
-      enrolled: 0,
-      duration: form.duration || "0m",
-    };
-    setVideos((p) => [newV, ...p]);
-    setForm({ title: "", description: "", duration: "", thumbnailFile: null, videoFile: null, thumbnailPreview: null });
-    setActive("myvideos");
+    try {
+      const newVideo = await authService.post('/teacher/videos', fd, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setVideos((p) => [newVideo, ...p]);
+      setForm({ title: "", description: "", duration: "", thumbnailFile: null, videoFile: null, thumbnailPreview: null });
+      setActive("myvideos");
+    } catch (err) {
+      console.error('Error uploading video:', err);
+      alert('Failed to upload video');
+    }
   };
 
   return (
@@ -148,9 +172,11 @@ const TeacherVideos = () => {
 
           {active === "myvideos" && (
             <section className="tv-grid-wrap">
-              {videos.length === 0 && <div className="empty">No videos yet. Click Create to upload your first video.</div>}
+              {loading && <div className="loading">Loading videos...</div>}
+              {error && <div className="error">{error}</div>}
+              {!loading && videos.length === 0 && <div className="empty">No videos yet. Click Create to upload your first video.</div>}
               <div className="tv-grid">
-                {videos.map((v) => (
+                {Array.isArray(videos) && videos.map((v) => (
                   <VideoCard
                     key={v.id}
                     video={v}

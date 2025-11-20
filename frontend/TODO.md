@@ -1,33 +1,15 @@
-# TODO for Setting Up MERN Project "Saksham"
+# TODO List for TeacherDashboard Finances and Schedule Sections
 
-- [ ] Create the full folder structure as specified
-- [ ] Initialize backend: Run npm init in backend/, install dependencies (express, mongoose, redis, jsonwebtoken, bcryptjs, etc.)
-- [ ] Create all backend files with minimal boilerplate code:
-  - [ ] backend/src/config/db.js (MongoDB Atlas connection)
-  - [ ] backend/src/config/redis.js (Redis connection)
-  - [ ] backend/src/models/user.model.js
-  - [ ] backend/src/models/course.model.js
-  - [ ] backend/src/models/class.model.js
-  - [ ] backend/src/models/booking.model.js
-  - [ ] backend/src/models/transaction.model.js
-  - [ ] backend/src/routes/user.routes.js
-  - [ ] backend/src/routes/course.routes.js
-  - [ ] backend/src/routes/booking.routes.js
-  - [ ] backend/src/controllers/user.controller.js
-  - [ ] backend/src/controllers/ai.controller.js
-  - [ ] backend/src/services/ai.service.js
-  - [ ] backend/src/services/payment.service.js
-  - [ ] backend/src/services/mail.service.js
-  - [ ] backend/src/utils/jwt.js
-  - [ ] backend/src/utils/response.js
-  - [ ] backend/src/app.js
-  - [ ] backend/src/server.js
-  - [ ] backend/package.json
-- [ ] Initialize frontend: Run npx create-react-app frontend (no TS, no Tailwind)
-- [ ] Prepare mobile: Create mobile/ folder structure, npm init, install React Native dependencies, create basic App.js and placeholder folders
-- [ ] Create README.md at root with project description
-- [ ] Install backend dependencies: npm install in backend/
-- [ ] Install mobile dependencies: npm install in mobile/
-- [ ] Test backend server: npm start in backend/
-- [ ] Test frontend: npm start in frontend/
-- [ ] Verify all files have minimal valid code
+## Finances Section
+- [x] Add state variables for earnings, payments, totals, loading, error in Finances.jsx
+- [x] Implement useEffect to fetch data from /teacher/finances using authService.get
+- [x] Parse API response to set earnings array for chart, payments array for table, and totals for cards
+- [x] Add loading spinner and error message display in UI
+- [x] Update finance cards to display dynamic totals instead of hardcoded values
+
+## Schedule Section
+- [x] Change events to useState and add useEffect to fetch from /teacher/schedule on mount
+- [x] Modify addEvent function to POST to /teacher/schedule with event data and update local state on success
+- [x] Keep local delete functionality (no backend DELETE endpoint available)
+- [x] Add loading/error states for API calls
+- [x] Add loading spinner and error message display in UI for Schedule section

@@ -1,0 +1,85 @@
+.library-page {
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* GRID */
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* CARD */
+.library-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.library-thumb {
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+}
+
+.library-body {
+  padding: 14px 16px;
+  flex-grow: 1;
+}
+
+/* Title */
+.library-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Meta Tags */
+.library-meta {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.tag {
+  padding: 4px 10px;
+  background: var(--sx-primary-light, #e7f0ff);
+  border-radius: 8px;
+  color: var(--sx-primary, #2b59ff);
+  font-weight: 500;
+}
+
+.size {
+  opacity: 0.7;
+}
+
+/* Actions */
+.library-actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn.ghost {
+  background: #f6f6f6;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.btn.primary {
+  background: var(--sx-primary);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 6px;
+}

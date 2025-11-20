@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   interests: { type: [String], default: [] },
   walletBalance: { type: Number, default: 0 },
   profileCompleted: { type: Boolean, default: false },
+  profileImage: { type: String, default: "" },
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", userSchema);

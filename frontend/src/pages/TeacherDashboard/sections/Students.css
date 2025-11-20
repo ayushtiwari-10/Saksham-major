@@ -1,0 +1,73 @@
+.students-container {
+  padding: 26px 36px;
+}
+
+.students-title {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: var(--serif);
+  margin-bottom: 18px;
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.students-table th,
+.students-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.students-table th {
+  font-weight: 700;
+  font-size: 15px;
+  background: #f9f4ec;
+}
+
+.student-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.student-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-badge.active {
+  background: #c0f1d5;
+  color: #0f6f40;
+}
+
+.status-badge.pending {
+  background: #fde2c8;
+  color: #9a4d12;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 8px;
+}

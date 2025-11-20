@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 import NotificationCard from "../../components/NotificationCard";
 import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { user, login } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     emailOrName: "",
@@ -24,32 +26,19 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // ==== BACKEND INTEGRATION READY ====
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setNotification({ type: 'error', message: data.message || "Login failed" });
-        return;
-      }
-
+    const result = await login(formData);
+    if (result.success) {
       setNotification({ type: 'success', message: 'Login successful!' });
-      // Save token
-      localStorage.setItem("token", data.token);
-
-      // Redirect to Interests Page
-      setTimeout(() => {
+      const user = result.user;
+      if (!user || !user.interests || user.interests.length === 0) {
         navigate("/interests");
-      }, 2000);
-    } catch (error) {
-      console.error("Login error:", error);
-      setNotification({ type: 'error', message: 'Something went wrong. Please try again.' });
+      } else if (user && user.role === "teacher") {
+        navigate("/teacher/dashboard");
+      } else {
+        navigate("/student/dashboard");
+      }
+    } else {
+      setNotification({ type: 'error', message: result.message });
     }
   };
 

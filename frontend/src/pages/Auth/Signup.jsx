@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 import NotificationCard from "../../components/NotificationCard";
 import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { signup } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,30 +39,14 @@ const Signup = () => {
       return;
     }
 
-    try {
-      // ==== BACKEND INTEGRATION READY ====
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setNotification({ type: 'error', message: data.message || "Signup failed" });
-        return;
-      }
-
+    const result = await signup(formData);
+    if (result.success) {
       setNotification({ type: 'success', message: 'Account created successfully!' });
-      localStorage.setItem("token", data.token);
-
       setTimeout(() => {
         navigate("/interests");
       }, 2000);
-    } catch (error) {
-      console.error("Signup error:", error);
-      setNotification({ type: 'error', message: 'Something went wrong. Please try again.' });
+    } else {
+      setNotification({ type: 'error', message: result.message });
     }
   };
 

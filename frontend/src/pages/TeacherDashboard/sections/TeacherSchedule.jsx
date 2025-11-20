@@ -2,16 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
 import Topbar from "../../../components/Topbar";
+import { authService } from "../../../services/auth.service";
 import "./TeacherSchedule.css";
-
-/**
- * Teacher Schedule page
- * - mini clickable calendar (left)
- * - today's timeline (center)
- * - week calendar mock (right)
- *
- * Replace TODOs with real backend endpoints when ready.
- */
 
 const sampleEvents = {
   // keyed by ISO date (yyyy-mm-dd)
@@ -35,9 +27,36 @@ function isoDate(d) {
 const TeacherSchedule = () => {
   const navigate = useNavigate();
   const [activeSection] = useState("Schedule");
-  const [today, setToday] = useState(new Date(2025, 7, 26)); // default shown date (26 Aug 2025) - you can set to new Date()
+  const [today, setToday] = useState(new Date());
   const [month, setMonth] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
-  const [events, setEvents] = useState(sampleEvents);
+  const [events, setEvents] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSchedule = async () => {
+      try {
+        setLoading(true);
+        const response = await authService.get('/teacher/schedule');
+        // Response is { success: true, message, data: events }
+        const eventsArray = response.data || [];
+        const eventsByDate = {};
+        eventsArray.forEach(event => {
+          if (!eventsByDate[event.date]) eventsByDate[event.date] = [];
+          eventsByDate[event.date].push({ id: event.id, time: event.time, title: event.title });
+        });
+        setEvents(eventsByDate);
+        setError(null);
+      } catch (err) {
+        setError('Failed to load schedule');
+        console.error('Error fetching schedule:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSchedule();
+  }, []);
 
   const handleNavigate = (section) => {
     const routes = {
@@ -45,15 +64,12 @@ const TeacherSchedule = () => {
       "My Videos": "/teacher/dashboard/videos",
       "Schedule": "/teacher/dashboard/schedule",
       "ChatBox": "/teacher/dashboard/chatbox",
-      "Finances": "/teacher/dashboard/finances" // assuming a route for finances
+      "Finances": "/teacher/dashboard/finances"
     };
     navigate(routes[section] || "/teacher/dashboard");
   };
 
-  useEffect(() => {
-    // TODO: fetch events for current month from backend and setEvents(...)
-    // fetch(`/api/teachers/${id}/events?month=${month.getMonth()+1}&year=${month.getFullYear()}`)
-  }, [month]);
+
 
   const daysInMonth = (y, m) => new Date(y, m + 1, 0).getDate();
 
@@ -70,17 +86,28 @@ const TeacherSchedule = () => {
     setToday(d);
   };
 
-  const addEvent = () => {
+  const addEvent = async () => {
     // simple prompt demo
     const title = prompt("Enter event title");
     const time = prompt("Enter time (e.g., 07:00 AM)");
     if (!title || !time) return;
-    const id = Date.now().toString();
-    const key = isoDate(today);
-    const next = { ...events };
-    next[key] = next[key] ? [{ id, time, title }, ...next[key]] : [{ id, time, title }];
-    setEvents(next);
-    // TODO: POST to backend and sync
+    try {
+      const response = await authService.post('/teacher/schedule', {
+        date: isoDate(today),
+        time,
+        title,
+      });
+      // Response is { success: true, message, data: { id, date, time, title } }
+      const newEvent = { id: response.data.id, time, title };
+      const key = isoDate(today);
+      setEvents(prev => ({
+        ...prev,
+        [key]: prev[key] ? [newEvent, ...prev[key]] : [newEvent]
+      }));
+    } catch (err) {
+      console.error('Error adding event:', err);
+      alert('Failed to add event');
+    }
   };
 
   const selectedKey = isoDate(today);
@@ -128,7 +155,7 @@ const TeacherSchedule = () => {
             </div>
 
             <div className="cal-grid">
-              {["S","M","T","W","T","F","S"].map((w)=> <div key={w} className="cal-weekday">{w}</div>)}
+              {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map((w)=> <div key={w} className="cal-weekday">{w.slice(0,1)}</div>)}
               {monthDays.map((d, idx) => {
                 const isToday = d && isoDate(d) === isoDate(new Date());
                 const isSelected = d && isoDate(d) === selectedKey;
@@ -161,8 +188,10 @@ const TeacherSchedule = () => {
             </div>
 
             <div className="timeline-list">
-              {todaysEvents.length === 0 && <div className="empty">No classes scheduled for this day.</div>}
-              {todaysEvents.map(ev => (
+              {loading && <div className="loading">Loading schedule...</div>}
+              {error && <div className="error">{error}</div>}
+              {!loading && !error && todaysEvents.length === 0 && <div className="empty">No classes scheduled for this day.</div>}
+              {!loading && !error && todaysEvents.map(ev => (
                 <div className="time-item" key={ev.id}>
                   <div className="time-left">{ev.time}</div>
                   <div className="time-body">

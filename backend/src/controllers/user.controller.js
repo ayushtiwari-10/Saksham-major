@@ -49,8 +49,23 @@ const updateInterests = async (req, res) => {
   }
 };
 
+const saveProfilePhoto = async (req, res) => {
+  try {
+    const userId = req.user.id; // make sure your auth middleware sets req.user
+    const { imageUrl } = req.body;
+    if (!imageUrl) return res.status(400).json({ message: "imageUrl required" });
+
+    const user = await User.findByIdAndUpdate(userId, { $set: { profileImage: imageUrl } }, { new: true });
+    res.json({ ok: true, user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 module.exports = {
   getProfile,
   updateProfile,
   updateInterests,
+  saveProfilePhoto,
 };

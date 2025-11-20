@@ -1,0 +1,67 @@
+.vriddhi-card {
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 340px;
+}
+
+.vriddhi-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vriddhi-icon {
+  width: 34px;
+}
+
+.vriddhi-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.vriddhi-count {
+  font-size: 42px;
+  font-weight: 800;
+  color: #664200;
+  margin: 12px 0;
+}
+
+.vriddhi-progress {
+  background: #f6e9c2;
+  height: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.vriddhi-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ffcf33, #ffb300);
+}
+
+.vriddhi-info {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 14px;
+}
+
+.vriddhi-btn {
+  width: 100%;
+  background: #ffb300;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.vriddhi-btn:hover {
+  background: #ff9f00;
+}

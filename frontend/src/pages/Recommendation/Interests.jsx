@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./interests.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
+import API from "../../services/api";
 
 const Interests = () => {
   const navigate = useNavigate();
@@ -22,10 +24,28 @@ const Interests = () => {
 
   const [selected, setSelected] = useState([]);
 
+  const { user, setUser } = useContext(AuthContext);
+
   const toggleSelect = (id) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
     );
+  };
+
+  const handleContinue = async () => {
+    if (selected.length === 0) return;
+
+    const selectedTitles = selected.map(id => categories.find(cat => cat.id === id).title);
+
+    try {
+      const res = await API.post('/user/interests', { interests: selectedTitles });
+      setUser({ ...(user || {}), interests: selectedTitles });
+      navigate("/student/dashboard");
+    } catch (error) {
+      console.error('Failed to update interests', error);
+      // Fallback to navigate anyway
+      navigate("/student/dashboard");
+    }
   };
 
   return (
@@ -51,7 +71,7 @@ const Interests = () => {
       <button
         className="continue-btn"
         disabled={selected.length === 0}
-        onClick={() => navigate("/dashboard")}
+        onClick={() => navigate("/student/dashboard")}
       >
         Continue
       </button>
