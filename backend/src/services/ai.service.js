@@ -2,8 +2,9 @@ const User = require('../models/user.model');
 const Course = require('../models/course.model');
 const UserActivity = require('../models/userActivity.model');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+require('dotenv').config();
 
-const genAI = new GoogleGenerativeAI('AIzaSyD5VZr4HeLif1LqET6K1cpcoY7ZXlrYiBs');
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
 const generateResponse = async (prompt) => {
