@@ -26,9 +26,9 @@ const DashboardHome = () => {
       } catch (err) {
         // fallback demo classes if fetch fails
         setClasses([
-          { id: "c1", title: "Knitting Basics", image: "https://images.unsplash.com/photo-1520975917014-84f77f2e6b5a?q=80&w=1200", progress: 39, students: 24 },
+          { id: "c1", title: "Knitting Basics", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR55RFQw9Jn7yKwyG66HNJz0hjK5NJ6DbShxA&s", progress: 39, students: 24 },
           { id: "c2", title: "Baking Essentials", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200", progress: 64, students: 12 },
-          { id: "c3", title: "Handmade Crafts", image: "https://images.unsplash.com/photo-1592928306958-3f7f2d8b4a6f?q=80&w=1200", progress: 12, students: 6 },
+          { id: "c3", title: "Handmade Crafts", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA_ilWPvU_PRjT4m5AaawZJ_VSn19bRuKfcg&s", progress: 12, students: 6 },
         ]);
       }
     };

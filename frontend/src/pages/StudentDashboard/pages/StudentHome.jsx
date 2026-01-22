@@ -7,7 +7,7 @@ const SAMPLE_COURSES = new Array(8).fill(0).map((_, i) => ({
   title: "Knitting",
   hours: 7 + i,
   progress: [39, 64, 12, 80, 25][i % 5],
-  image: "https://images.unsplash.com/photo-1520975917014-84f77f2e6b5a?q=80&w=1200",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR55RFQw9Jn7yKwyG66HNJz0hjK5NJ6DbShxA&s",
 }));
 
 const StudentHome = () => {

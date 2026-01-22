@@ -44,6 +44,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const signup = async (userData) => {
+    try {
+      const res = await API.post('/auth/signup', userData);
+      const { token, user } = res.data;
+      localStorage.setItem('token', token);
+      API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setUser(user); // Set user directly from signup response
+      return { success: true, user };
+    } catch (err) {
+      console.error('Signup failed', err);
+      return { success: false, message: err.response?.data?.message || 'Signup failed' };
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     delete API.defaults.headers.common['Authorization'];
@@ -51,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, setUser, loading, login, logout, signup }}>
       {children}
     </AuthContext.Provider>
   );
