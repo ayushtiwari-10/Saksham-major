@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap");
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -15,18 +17,39 @@
 }
 
 .navbar-links {
+  position: relative;
   display: flex;
-  gap: 2rem;
-  background-color: #d9d9d9;
+  gap: 3rem;
+  background-color: #f7f2f2;
   padding: 0.6rem 2rem;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .navbar-links a {
   text-decoration: none;
+  font-family: "Inter", sans-serif;
   color: black;
   font-weight: 600;
   font-size: 1rem;
+}
+.navbar-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #2e8b6d;
+  transition: width 0.75s ease;
+}
+
+.navbar-links a:hover {
+  transform: translateY(-3px) scale(1.05);
+  color: #2e8b6d;
+}
+/* hover effect */
+.navbar-links a:hover::after {
+  width: 100%;
 }
 
 .get-started {

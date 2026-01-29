@@ -1,5 +1,6 @@
 import React from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -7,13 +8,13 @@ const Navbar = () => {
       <div className="navbar-logo">सक्षम</div>
 
       <div className="navbar-links">
-        <a href="#">home</a>
-        <a href="#">home</a>
-        <a href="#">home</a>
-        <a href="#">home</a>
+        <a href="#home">Home</a>
+        <a href="#courses">Top Courses</a>
+        <a href="#community">Contact</a>
+        <a href="#faq">FAQ</a>
       </div>
-
-      <button className="get-started">Get Started</button>
+<Link to="/signup"
+       className="get-started">Get Started</Link>
     </nav>
   );
 };

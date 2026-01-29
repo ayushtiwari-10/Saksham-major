@@ -4,15 +4,21 @@ import "./HeroSection.css";
 
 const HeroSection = () => {
   return (
-    <div className="hero-container">
+    <div
+      className="hero-container"
+      style={{
+        backgroundImage: "url(/bgimage.jpg)",
+      }}
+    ><div className="hero-content">
       <h1 className="hero-text">
         Teach, <br /> Learn <br /> And <br /> Lead
       </h1>
+
       <Link to="/signup" className="hero-button">
         Get Started
       </Link>
 
-      <img
+      {/* <img
         src="https://test.rbuchd.com/wp-content/uploads/2022/06/Online-Learning.png"
         alt="Online Learning"
         className="hero-image-right"
@@ -28,7 +34,8 @@ const HeroSection = () => {
         src="https://t3.ftcdn.net/jpg/09/11/90/74/360_F_911907457_VWuZim5bOb8WrrdLb3mvY6zUrLtai90i.jpg"
         alt="Stars decoration"
         className="hero-stars"
-      />
+      /> */}
+    </div>
     </div>
   );
 };

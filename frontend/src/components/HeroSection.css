@@ -1,42 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap");
+
 .hero-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fffcf5;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   position: relative;
   min-height: 90vh;
   text-align: center;
   overflow: hidden;
 }
 
-.hero-text {
-  font-family: "Brush Script MT", cursive;
-  font-size: 5rem;
-  line-height: 1.2;
-  color: #000;
-  margin-top: 80px;
+.hero-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8); /* strong shadow */
+  z-index: 1;
 }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2.5rem 5rem;   /* less vertical, more horizontal */
+
+  border-radius: 22px;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+  text-align: center;
+
+  max-width: 700px;      /* makes it wider */
+  width: 90%;            /* responsive */
+}
+
+
+.hero-text {
+  font-family: "Cinzel", serif;
+  font-size: 3.4rem;     /* reduced */
+  line-height: 1.2;
+
+  color: #ffffff;
+  margin: 0 0 1.2rem;    /* smaller gap to button */
+
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+}
+
 
 .hero-button {
   background-color: #ff66d9;
   border: none;
   border-radius: 25px;
-  padding: 12px 32px;
+
+  padding: 10px 30px;
+  font-size: 0.95rem;
+
+  margin-top: 5px;   /* closer to text */
+
   color: #000;
   font-weight: bold;
-  margin-top: 40px;
   cursor: pointer;
-  font-size: 1rem;
   text-decoration: none;
-  display: inline-block;
+
+  transition: all 0.3s ease;
 }
+
 
 .hero-button:hover {
   background-color: #ff80e6;
 }
 
-.hero-image-left {
+/* .hero-image-left {
   position: absolute;
   bottom: 10%;
   left: 10%;
@@ -55,4 +101,4 @@
   bottom: 25%;
   right: 30%;
   width: 120px;
-}
+} */
