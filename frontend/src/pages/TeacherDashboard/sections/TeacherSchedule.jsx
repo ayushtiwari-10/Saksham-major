@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../../components/Sidebar";
 import Topbar from "../../../components/Topbar";
 import { authService } from "../../../services/auth.service";
 import "./TeacherSchedule.css";
@@ -139,7 +138,6 @@ const TeacherSchedule = () => {
 
   return (
     <div className="teacher-root">
-      <Sidebar active={activeSection} onNavigate={handleNavigate} />
       <div className="teacher-main">
         <Topbar title="Schedule" />
 

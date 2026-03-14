@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Sidebar from "../../components/Sidebar";
 import Topbar from "../../components/Topbar";
 import "./Profile.css";
 import { uploadProfilePic, updateProfile } from "../../api/userApi";
@@ -41,7 +40,6 @@ const TeacherProfile = () => {
 
   return (
     <div className="teacher-root">
-      <Sidebar active="Profile" />
 
       <div className="teacher-main">
         <Topbar title="My Profile" />

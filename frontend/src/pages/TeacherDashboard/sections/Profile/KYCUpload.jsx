@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Sidebar from "../../../../components/Sidebar";
 import Topbar from "../../../../components/Topbar";
 import "./Profile.css";
 
@@ -8,8 +7,6 @@ const KYCUpload = () => {
 
   return (
     <div className="teacher-root">
-      <Sidebar active="KYC" />
-
       <div className="teacher-main">
         <Topbar title="KYC Upload" />
 

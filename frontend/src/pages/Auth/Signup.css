@@ -2,8 +2,10 @@
 .signup-container {
   display: flex;
   height: 100vh;
+  width: 100vw;
   background-color: #fffaf3;
   font-family: "Poppins", sans-serif;
+  overflow: hidden;
 }
 
 /* === LEFT SECTION === */
@@ -12,20 +14,36 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 60px;
+  padding: 30px 50px;
+  min-width: 0;
+  overflow-y: auto; /* Allow internal scrolling if needed */
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar for left section - Chrome, Safari, Opera */
+.signup-left::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Hide scrollbar for left section - IE, Edge, Firefox */
+.signup-left {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .logo {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   color: #004d40;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 h2 {
   font-weight: 600;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   color: #222;
+  font-size: 22px;
 }
 
 /* === FORM STYLING === */
@@ -33,15 +51,15 @@ form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 360px;
+  max-width: 350px;
 }
 
 form input {
-  margin: 12px 0;
-  padding: 14px 18px;
+  margin: 10px 0;
+  padding: 14px 16px;
   border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  font-size: 15px;
+  border-radius: 10px;
+  font-size: 14px;
   font-family: "Poppins", sans-serif;
   outline: none;
   background-color: #fafafa;
@@ -58,7 +76,7 @@ form input:focus {
 /* === PLACEHOLDER TEXT === */
 ::placeholder {
   color: #9e9e9e;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /* === TERMS CHECKBOX === */
@@ -84,7 +102,7 @@ form input:focus {
   font-weight: 600;
   border: none;
   border-radius: 10px;
-  padding: 13px;
+  padding: 14px;
   cursor: pointer;
   margin-top: 15px;
   transition: all 0.25s ease-in-out;
@@ -98,21 +116,21 @@ form input:focus {
 /* === SOCIAL SECTION === */
 .or-text {
   text-align: center;
-  margin: 25px 0 12px 0;
+  margin: 20px 0 12px 0;
   color: #666;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .social-icons {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  gap: 15px;
 }
 
 /* Full-color icons */
 .social-icons img {
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: none;
   padding: 0;
@@ -132,8 +150,8 @@ form input:focus {
 /* === SIGNIN TEXT === */
 .signin-text {
   text-align: center;
-  margin-top: 25px;
-  font-size: 14px;
+  margin-top: 20px;
+  font-size: 13px;
   color: #444;
 }
 
@@ -155,33 +173,70 @@ form input:focus {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 80px;
+  border-top-left-radius: 70px;
   overflow: hidden;
-  padding: 40px;
+  padding: 30px;
+  min-width: 0;
 }
 
 .signup-right img {
   width: 80%;
-  border-radius: 20px;
+  border-radius: 16px;
   object-fit: cover;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
 }
 
 .info-box {
   text-align: center;
-  margin-top: 25px;
-  max-width: 350px;
+  margin-top: 20px;
+  max-width: 320px;
 }
 
 .info-box h3 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: #004d40;
 }
 
 .info-box p {
-  font-size: 15px;
+  font-size: 14px;
   color: #333;
   line-height: 1.5;
 }
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 900px) {
+  .signup-container {
+    flex-direction: column;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .signup-left {
+    padding: 20px 30px;
+    flex: none;
+    overflow-y: visible;
+  }
+  
+  .signup-right {
+    max-height: 40vh;
+    border-top-left-radius: 40px;
+    flex: none;
+    height: auto;
+  }
+  
+  .signup-right img {
+    width: 60%;
+  }
+  
+  .info-box h3 {
+    font-size: 16px;
+  }
+  
+  .info-box p {
+    font-size: 13px;
+  }
+}
+

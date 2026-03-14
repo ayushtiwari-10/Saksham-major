@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Outfit:wght@400;600;800&display=swap");
 
 .hero-container {
   display: flex;
@@ -8,6 +8,7 @@
 
   background-size: cover;
   background-position: center;
+  background-attachment: fixed; /* Parallax-like feel */
   background-repeat: no-repeat;
 
   position: relative;
@@ -16,89 +17,156 @@
   overflow: hidden;
 }
 
+/* Rich Dark Gradient Overlay */
 .hero-container::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8); /* strong shadow */
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.9) 0%,
+    rgba(6, 182, 212, 0.4) 100%
+  );
   z-index: 1;
 }
 
+/* Glassmorphic Container */
 .hero-content {
   position: relative;
   z-index: 2;
 
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2.5rem 5rem;   /* less vertical, more horizontal */
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3rem 6rem;
+  border-radius: 24px;
+  
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
-  border-radius: 22px;
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   text-align: center;
 
-  max-width: 700px;      /* makes it wider */
-  width: 90%;            /* responsive */
+  max-width: 800px;
+  width: 90%;
+  
+  /* Entrance Animation */
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 
 .hero-text {
   font-family: "Cinzel", serif;
-  font-size: 3.4rem;     /* reduced */
-  line-height: 1.2;
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1.15;
 
-  color: #ffffff;
-  margin: 0 0 1.2rem;    /* smaller gap to button */
-
-  letter-spacing: 2.5px;
+  /* Animated Vibrant Text Gradient */
+  background: linear-gradient(
+    270deg,
+    #ff6b6b,
+    #fca048,
+    #f2ec72,
+    #48c6ef,
+    #6f86d6,
+    #ff6b6b
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  animation: gradientFlow 10s ease infinite, fadeInUp 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  
+  margin: 0 0 2rem;
+  letter-spacing: 2px;
   text-transform: uppercase;
-
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+  
+  /* Subtle drop shadow behind the gradient text */
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
 }
 
 
 .hero-button {
-  background-color: #ff66d9;
+  display: inline-block;
+  background: linear-gradient(135deg, #0f766e 0%, #06b6d4 100%);
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
 
-  padding: 10px 30px;
-  font-size: 0.95rem;
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  font-family: "Outfit", sans-serif;
 
-  margin-top: 5px;   /* closer to text */
-
-  color: #000;
-  font-weight: bold;
+  color: #fff;
+  font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-
-  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
 }
 
+/* Button Glow Effect on Hover */
+.hero-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
 
 .hero-button:hover {
-  background-color: #ff80e6;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(6, 182, 212, 0.6);
 }
 
-/* .hero-image-left {
-  position: absolute;
-  bottom: 10%;
-  left: 10%;
-  width: 200px;
+.hero-button:hover::after {
+  opacity: 1;
 }
 
-.hero-image-right {
-  position: absolute;
-  top: 10%;
-  right: 10%;
-  width: 220px;
+.hero-button:active {
+  transform: translateY(0);
 }
 
-.hero-stars {
-  position: absolute;
-  bottom: 25%;
-  right: 30%;
-  width: 120px;
-} */
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 2rem;
+  }
+  .hero-text {
+    font-size: 2.5rem;
+  }
+}
+

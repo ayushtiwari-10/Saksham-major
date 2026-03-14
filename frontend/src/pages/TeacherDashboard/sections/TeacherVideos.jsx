@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../../components/Sidebar";
 import Topbar from "../../../components/Topbar";
 import VideoCard from "../../../components/VideoCard";
 import { authService } from "../../../services/auth.service";
@@ -154,7 +153,6 @@ const TeacherVideos = () => {
 
   return (
     <div className="teacher-root">
-      <Sidebar active="My Videos" onNavigate={handleNavigate} />
       <div className="teacher-main">
         <Topbar title="My Videos" />
 

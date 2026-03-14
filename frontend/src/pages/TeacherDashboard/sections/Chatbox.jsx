@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../../components/Sidebar";
 import Topbar from "../../../components/Topbar";
 import "./Chatbox.css";
 
@@ -28,7 +27,6 @@ const Chatbox = () => {
 
   return (
     <div className="chat-root">
-      <Sidebar active="ChatBox" onNavigate={handleNavigate} />
       <div className="chat-main">
         <Topbar title="Chatbox" />
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../../components/Sidebar";
 import Topbar from "../../../components/Topbar";
 import "./Students.css";
 
@@ -48,8 +47,6 @@ const Students = () => {
 
   return (
     <div className="teacher-root">
-      <Sidebar active="Students" onNavigate={handleNavigate} />
-
       <div className="teacher-main">
         <Topbar title="Students List" />
 

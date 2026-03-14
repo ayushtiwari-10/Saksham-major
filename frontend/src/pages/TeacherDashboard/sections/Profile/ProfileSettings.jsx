@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../../../contexts/AuthContext";
-import Sidebar from "../../../../components/Sidebar";
 import Topbar from "../../../../components/Topbar";
 import "../../../../pages/TeacherDashboard/TeacherDashboard.css";
 import "./Profile.css";
@@ -349,7 +348,6 @@ const ProfileSettings = () => {
 
   return (
     <div className="teacher-root">
-      <Sidebar active="Profile" />
       <div className="teacher-main">
         <Topbar title="Profile Settings" />
         {content}

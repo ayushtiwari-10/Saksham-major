@@ -1,12 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import "./TeacherDashboard.css";
+import DashboardLayout from "../../layouts/DashboardLayout";
 
 const TeacherDashboard = () => {
   return (
-    <div className="teacher-root">
-      <Outlet />  {/* This is where nested child pages will load */}
-    </div>
+    <DashboardLayout role="teacher">
+      <Outlet />
+    </DashboardLayout>
   );
 };
 

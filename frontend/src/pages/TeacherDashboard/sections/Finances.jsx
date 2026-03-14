@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../../components/Sidebar";
 import Topbar from "../../../components/Topbar";
 import { authService } from "../../../services/auth.service";
 import "./Finances.css";
@@ -76,8 +75,6 @@ const Finances = () => {
 
   return (
     <>
-      <Sidebar active="Finances" onNavigate={handleNavigate} />
-
       <div className="teacher-main">
         <Topbar title="Finances" />
 

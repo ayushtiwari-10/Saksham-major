@@ -30,9 +30,7 @@ const Login = () => {
     if (result.success) {
       setNotification({ type: 'success', message: 'Login successful!' });
       const user = result.user;
-      if (!user || !user.interests || user.interests.length === 0) {
-        navigate("/interests");
-      } else if (user && user.role === "teacher") {
+      if (user && user.role === "teacher") {
         navigate("/teacher/dashboard");
       } else {
         navigate("/student/dashboard");

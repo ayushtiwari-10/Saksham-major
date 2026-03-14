@@ -1,12 +1,10 @@
 import React from "react";
-import Sidebar from "../../../../components/Sidebar";
 import Topbar from "../../../../components/Topbar";
 import "./Profile.css";
 
 const ChangePassword = () => {
   return (
     <div className="teacher-root">
-      <Sidebar active="ChangePassword" />
 
       <div className="teacher-main">
         <Topbar title="Change Password" />

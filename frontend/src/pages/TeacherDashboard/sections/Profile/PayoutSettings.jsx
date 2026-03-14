@@ -1,12 +1,10 @@
 import React from "react";
-import Sidebar from "../../../../components/Sidebar";
 import Topbar from "../../../../components/Topbar";
 import "./Profile.css";
 
 const PayoutSettings = () => {
   return (
     <div className="teacher-root">
-      <Sidebar active="PayoutSettings" />
 
       <div className="teacher-main">
         <Topbar title="Payout Settings" />

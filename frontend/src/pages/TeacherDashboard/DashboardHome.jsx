@@ -1,7 +1,6 @@
 // frontend/src/pages/TeacherDashboard/DashboardHome.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../components/Sidebar";
 import Topbar from "../../components/Topbar";
 import NoticeItem from "./NoticeItem";
 import AddClassModal from "../../components/AddClassModal";
@@ -60,24 +59,8 @@ const DashboardHome = () => {
 
   return (
     <div className="teacher-root">
-      <Sidebar active="Dashboard" onNavigate={(page) => {
-        const routes = {
-          "Dashboard": "/teacher/dashboard",
-          "My Videos": "/teacher/dashboard/videos",
-          "Schedule": "/teacher/dashboard/schedule",
-          "ChatBox": "/teacher/dashboard/chatbox",
-          "Finances": "/teacher/dashboard/finances",
-          "Students": "/teacher/dashboard/students",
-          "Profile": "/teacher/dashboard/profile",
-          "ChangePassword": "/teacher/dashboard/change-password",
-          "PayoutSettings": "/teacher/dashboard/payout-settings",
-          "KYC": "/teacher/dashboard/kyc",
-        };
-        navigate(routes[page] || "/teacher/dashboard");
-      }} />
       <div className="teacher-main">
         <Topbar title="Dashboard" />
-
         <div className="teacher-content">
           <section className="classes-section">
             <div className="classes-header">

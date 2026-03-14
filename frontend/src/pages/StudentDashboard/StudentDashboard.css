@@ -1,15 +1,17 @@
 /* Student specific overrides - reuses variables from TeacherDashboard.css */
 
 /* root shell */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .student-root, .student-shell {
   display: flex;
   min-height: 100vh;
   width: 100%;
-}
-
-/* if TeacherSidebar exists with same class, keep compatibility */
-.student-sidebar .brand {
-  font-family: "Georgia", serif;
 }
 
 /* Student main */
@@ -17,68 +19,16 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 /* content */
 .student-content {
-  padding: 18px 36px;
+  padding: clamp(12px, 3vw, 36px);
+  box-sizing: border-box;
 }
 
-/* banner */
-.student-banner {
-  background: linear-gradient(90deg, rgba(47,155,102,0.06), rgba(255,255,255,0.5));
-  padding: 22px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.banner-left {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
-
-.welcome-circle {
-  width: 92px;
-  height: 92px;
-  border-radius: 20px;
-  background: linear-gradient(180deg,#dff3ea,#fff);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
-}
-
-.banner-left h1 {
-  font-family: "Georgia", serif;
-  margin: 0;
-  font-size: 26px;
-}
-
-.banner-left .muted {
-  color: #6c6c6c;
-  margin-top: 6px;
-}
-
-.stats-card {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  background: #fff;
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
-}
-
-.stat {
-  padding: 6px 14px;
-  text-align: center;
-}
-.stat .num {
-  font-weight: 800;
-  font-size: 20px;
-}
+/* banner styles removed to prevent conflicts with StudentHome.css */
 
 /* tabs */
 .tabs-row {
@@ -167,7 +117,8 @@
   border-radius: 999px;
   border: 1px solid #eee;
   background: #fff;
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
 }
 .social.small {
   border-radius: 8px;
@@ -182,3 +133,5 @@
   .student-content { padding: 12px; }
   .course-grid { grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); }
 }
+
+
