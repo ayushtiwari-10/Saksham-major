@@ -3,7 +3,7 @@ const User = require('../models/user.model');
 // --- Get User Profile ---
 const getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-passwordHash");
+    const user = await User.findById(req.user._id).select("-passwordHash"); // ✅ FIXED
     res.json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -14,7 +14,7 @@ const getProfile = async (req, res) => {
 const updateProfile = async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(
-      req.user.id,
+      req.user._id,   // ✅ FIXED
       req.body,
       { new: true }
     ).select("-passwordHash");
@@ -34,8 +34,10 @@ const updateInterests = async (req, res) => {
       return res.status(400).json({ message: "Interests must be an array" });
     }
 
+    console.log("Incoming interests:", interests); // 🔥 DEBUG
+
     const user = await User.findByIdAndUpdate(
-      req.user.id,
+      req.user._id,   // ✅ FIXED (MOST IMPORTANT)
       {
         interests,
         profileCompleted: true
@@ -43,19 +45,31 @@ const updateInterests = async (req, res) => {
       { new: true }
     ).select("-passwordHash");
 
+    console.log("Saved user:", user); // 🔥 DEBUG
+
     res.json({ user });
   } catch (error) {
+    console.error("Error updating interests:", error);
     res.status(500).json({ error: error.message });
   }
 };
 
+// --- Save Profile Photo ---
 const saveProfilePhoto = async (req, res) => {
   try {
-    const userId = req.user.id; // make sure your auth middleware sets req.user
-    const { imageUrl } = req.body;
-    if (!imageUrl) return res.status(400).json({ message: "imageUrl required" });
+    const userId = req.user._id; // ✅ FIXED
 
-    const user = await User.findByIdAndUpdate(userId, { $set: { profileImage: imageUrl } }, { new: true });
+    const { imageUrl } = req.body;
+    if (!imageUrl) {
+      return res.status(400).json({ message: "imageUrl required" });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $set: { profileImage: imageUrl } },
+      { new: true }
+    );
+
     res.json({ ok: true, user });
   } catch (err) {
     console.error(err);

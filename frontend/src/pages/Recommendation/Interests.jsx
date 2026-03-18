@@ -38,7 +38,7 @@ const Interests = () => {
     const selectedTitles = selected.map(id => categories.find(cat => cat.id === id).title);
 
     try {
-      const res = await API.post('/user/interests', { interests: selectedTitles });
+      const res = await API.patch('/user/interests', { interests: selectedTitles });
       setUser({ ...(user || {}), interests: selectedTitles });
       navigate("/student/dashboard");
     } catch (error) {
@@ -71,7 +71,7 @@ const Interests = () => {
       <button
         className="continue-btn"
         disabled={selected.length === 0}
-        onClick={() => navigate("/student/dashboard")}
+        onClick={handleContinue}
       >
         Continue
       </button>

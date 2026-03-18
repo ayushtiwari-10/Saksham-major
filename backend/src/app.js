@@ -7,6 +7,7 @@ const userRoutes = require("./routes/user.routes");
 const teacherRoutes = require("./routes/teacher.routes");
 const coinsRoutes = require("./routes/coins.routes");
 const aiRoutes = require("./routes/ai.routes");
+const recommendationRoutes = require("./routes/recommendation.routes");
 
 const app = express();
 app.use(cors());
@@ -18,7 +19,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/teacher", teacherRoutes);
 app.use("/api/coins", coinsRoutes);
 app.use("/api/ai", aiRoutes);
-
+app.use("/api/recommendations", recommendationRoutes);
 // health
 app.get("/health", (req, res) => res.send({ ok: true }));
 
