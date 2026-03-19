@@ -9,14 +9,39 @@
 }
 
 
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  margin-bottom: 28px;
+}
+
+
 .brand {
   font-family: "Georgia", serif;
   font-size: 28px;
   font-weight: 700;
   color: #004d40;
-  margin-bottom: 28px;
-  padding-left: 18px;
 }
+
+.profile-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #daf7cf, #bfeab2);
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.profile-icon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
 
 .sidebar-nav {
   display: flex;
@@ -42,7 +67,7 @@
 }
 
 .saksham-sidebar .sidebar-nav .sidebar-item.active {
-  background: linear-gradient(180deg, #6ae08d, #016881);
+  background: linear-gradient(180deg, #8af5aa, #0faad1);
   color: #042f1f;
   transform: translateX(3px);
 }

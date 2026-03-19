@@ -28,7 +28,7 @@ import MyCourses from "./pages/StudentDashboard/pages/StudentCourses";
 import MyLibrary from "./pages/StudentDashboard/pages/StudentLibrary";
 import Explore from "./pages/StudentDashboard/pages/StudentExplore";
 import OfflineClasses from "./pages/StudentDashboard/pages/StudentOfflineClasses";
-import Categories from "./pages/StudentDashboard/pages/StudentCategories";
+
 import Saved from "./pages/StudentDashboard/pages/StudentSaved";
 import StudentChatBox from "./pages/StudentDashboard/pages/StudentChatBox";
 import StudentTransactions from "./pages/StudentDashboard/pages/StudentTransactions";
@@ -85,8 +85,8 @@ function App() {
             <Route path="library" element={<MyLibrary />} />
             <Route path="explore" element={<Explore />} />
             <Route path="offline" element={<OfflineClasses />} />
-            <Route path="categories" element={<Categories />} />
             <Route path="saved" element={<Saved />} />
+
             <Route path="chatbox" element={<StudentChatBox />} />
             <Route path="transactions" element={<StudentTransactions />} />
             <Route path="redeem" element={<RedeemRewards />} />

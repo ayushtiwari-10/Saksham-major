@@ -31,11 +31,38 @@ const TEACHERS = new Array(6).fill(0).map((_, i) => ({
     "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=800",
 }));
 
+const CATEGORY_LIST = [
+  { name: "Music", icon: "🎵", color: "#e1e7ff" },
+  { name: "Dance", icon: "💃", color: "#ffe1f0" },
+  { name: "Art & Craft", icon: "🎨", color: "#fff1d6" },
+  { name: "Cooking", icon: "🍳", color: "#ffe8d1" },
+  { name: "Coding", icon: "💻", color: "#dff7ff" },
+  { name: "Fitness", icon: "🏋️", color: "#e9ffe6" },
+  { name: "Yoga", icon: "🧘‍♂️", color: "#e8f5ff" },
+  { name: "Photography", icon: "📸", color: "#fff0e4" },
+  { name: "Business", icon: "📈", color: "#f3e8ff" },
+  { name: "Languages", icon: "🌍", color: "#e1f3ff" },
+  { name: "Beauty & Makeup", icon: "💄", color: "#ffe1ea" },
+  { name: "Digital Marketing", icon: "📱", color: "#e6ffe4" },
+  { name: "Career Skills", icon: "🧠", color: "#edf0ff" },
+  { name: "Home Décor", icon: "🏡", color: "#fff7e7" },
+  { name: "Sewing & Tailoring", icon: "🧵", color: "#ffe9f6" },
+  { name: "Acting", icon: "🎭", color: "#f5e9ff" },
+  { name: "Finance", icon: "💰", color: "#f2ffe5" },
+  { name: "Writing", icon: "✍️", color: "#fff3e1" },
+  { name: "Gardening", icon: "🌱", color: "#e4ffe8" },
+  { name: "Public Speaking", icon: "🎤", color: "#eaf1ff" },
+];
+
+
 const StudentExplore = () => {
   const [levelFilter, setLevelFilter] = useState("All");
+  const [search, setSearch] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
   const [trendingCourses, setTrendingCourses] = useState([]);
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     fetchCourses();
@@ -67,7 +94,13 @@ const StudentExplore = () => {
           <h1>Explore New Skills</h1>
           <p>Discover courses, teachers and offline classes near you</p>
 
-          <input className="explore-search" placeholder="Search courses, categories..." />
+<input 
+  className="explore-search" 
+  placeholder="Search courses, categories..." 
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+/>
+
         </div>
         <div className="explore-art" />
       </div>
@@ -89,9 +122,13 @@ const StudentExplore = () => {
       <h2 className="section-title">Trending Courses 🔥</h2>
 
       <div className="explore-grid">
-        {TRENDING.filter(
-          (c) => levelFilter === "All" || c.level === levelFilter
-        ).map((c) => (
+{TRENDING.filter((c) => {
+  const matchesLevel = levelFilter === "All" || c.level === levelFilter;
+  const matchesSearch = !search || c.title.toLowerCase().includes(search.toLowerCase());
+  const matchesCategory = !categoryFilter || c.title.toLowerCase().includes(categoryFilter.toLowerCase());
+  return matchesLevel && matchesSearch && matchesCategory;
+}).map((c) => (
+
           <div className="explore-card" key={c.id}>
             <div
               className="explore-thumb"
@@ -113,18 +150,33 @@ const StudentExplore = () => {
         ))}
       </div>
 
-      {/* Categories */}
-      <h2 className="section-title" style={{ marginTop: 34 }}>
-        Top Categories
-      </h2>
-
-      <div className="category-row">
-        {CATEGORIES.map((cat, idx) => (
-          <div key={idx} className="category-chip">
-            {cat}
-          </div>
-        ))}
+      {/* Browse Categories */}
+      <div className="categories-section">
+        <div className="cat-top-row">
+          <input 
+            className="cat-search"
+            placeholder="Search categories..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className="cat-grid">
+          {CATEGORY_LIST.filter((cat) =>
+            !search || cat.name.toLowerCase().includes(search.toLowerCase())
+          ).map((cat) => (
+            <div
+              key={cat.name}
+              className={`cat-card ${categoryFilter === cat.name ? "active" : ""}`}
+              style={{ background: cat.color }}
+              onClick={() => setCategoryFilter(categoryFilter === cat.name ? "" : cat.name)}
+            >
+              <div className="cat-icon">{cat.icon}</div>
+              <div className="cat-name">{cat.name}</div>
+            </div>
+          ))}
+        </div>
       </div>
+
 
       {/* Popular Teachers */}
       <h2 className="section-title" style={{ marginTop: 34 }}>

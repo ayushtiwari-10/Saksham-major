@@ -1,8 +1,13 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Sidebar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+
 
 const Sidebar = ({ role = "student" }) => {
   const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
+
   const location = useLocation(); // ✅ MUST be inside component
 
   const switchToTeacher = () => {
@@ -22,25 +27,40 @@ const Sidebar = ({ role = "student" }) => {
       { label: "My Library", path: "/student/dashboard/library" },
       { label: "Explore", path: "/student/dashboard/explore" },
       { label: "Offline Classes", path: "/student/dashboard/offline" },
-      { label: "Categories", path: "/student/dashboard/categories" },
       { label: "ChatBox", path: "/student/dashboard/chatbox" },
-      { label: "Profile", path: "/student/dashboard/profile" },
+      { label: "Logout", onClick: "logout" },
       { label: "Switch to Teacher", action: "switchToTeacher" },
     ],
+
+
 teacher: [
   { label: "Dashboard", path: "/teacher/dashboard" },
   { label: "My Videos", path: "/teacher/dashboard/videos" },
   { label: "Schedule", path: "/teacher/dashboard/schedule" },
   { label: "Students", path: "/teacher/dashboard/students" },
   { label: "Finances", path: "/teacher/dashboard/finances" },
-  { label: "Profile", path: "/teacher/dashboard/profile" },
+  { label: "Chatbox", path: "/teacher/dashboard/chatbox" },
+  { label: "Logout", onClick: "logout" },
   { label: "Switch to Student", action: "switchToStudent" },
 ],
+
+
   };
+
 
   return (
     <aside className="saksham-sidebar">
-      <div className="brand">saksham</div>
+      <div className="header-top">
+        <button 
+          className="profile-icon"
+          onClick={() => navigate(`${role === 'student' ? '/student' : '/teacher'}/dashboard/profile`)}
+        >
+          👤
+        </button>
+        <div className="brand">saksham</div>
+
+      </div>
+
 
       <nav className="sidebar-nav">
         {menus[role].map((item) => (
@@ -52,11 +72,14 @@ teacher: [
             onClick={() => {
               if (item.path) {
                 navigate(item.path);
+              } else if (item.onClick === "logout") {
+                logout();
               } else if (item.action === "switchToTeacher") {
                 switchToTeacher();
               } else if (item.action === "switchToStudent") {
                 switchToStudent();
               }
+
             }}
           >
             {item.label}

@@ -26,16 +26,15 @@
 }
 
 .navbar-logo {
-  font-size: 2.2rem;
-  font-weight: 700;
-  font-family: "Noto Serif Devanagari", serif;
-  background: linear-gradient(135deg, #111 0%, #333 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
+
+.logo-img {
+  height: 44px;
+  width: auto;
+}
+
 
 .navbar-logo:hover {
   transform: scale(1.02);

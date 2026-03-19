@@ -51,8 +51,12 @@ const Login = () => {
       )}
       {/* ==== LEFT SIDE ==== */}
       <div className="login-left">
+        <button className="back-btn" onClick={() => navigate('/')}>
+          ←
+        </button>
         <h1 className="logo">saksham</h1>
         <h2>Login to your account</h2>
+
 
         <form onSubmit={handleSubmit}>
           <input

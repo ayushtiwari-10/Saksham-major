@@ -60,8 +60,12 @@ const Signup = () => {
         />
       )}
       <div className="signup-left">
+        <button className="back-btn" onClick={() => navigate('/')}>
+          ←
+        </button>
         <h1 className="logo">saksham</h1>
         <h2>Create your account</h2>
+
 
         <form onSubmit={handleSubmit}>
           <input

@@ -32,12 +32,34 @@
   scrollbar-width: none;  /* Firefox */
 }
 
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.back-btn:hover {
+  background: rgba(0,0,0,0.05);
+  color: #004d40;
+  transform: scale(1.1);
+}
+
 .logo {
   font-size: 28px;
   font-weight: 700;
   color: #004d40;
   margin-bottom: 20px;
 }
+
 
 h2 {
   font-weight: 600;
