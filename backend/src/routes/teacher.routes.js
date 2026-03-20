@@ -51,7 +51,7 @@ router.get('/messages', authenticate, getMessages);
 router.post('/messages', authenticate, sendMessage);
 
 // Classes
-router.post('/classes', authenticate, createClass);
+router.post('/classes', authenticate, upload.single('image'), createClass);
 router.get('/classes/my', authenticate, getMyClasses);
 
 module.exports = router;

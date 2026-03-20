@@ -1,16 +1,8 @@
-# TODO: Implement AI Chatbot Module
+# Course Creation & Recommendation Fix TODO
 
-## Frontend
-- [x] Create AIChatbot.jsx in frontend/src/pages/AIChatbot/
-- [x] Create AIChatbot.css in frontend/src/pages/AIChatbot/
-- [x] Add route for AI Chatbot in App.js for student and teacher dashboards
-- [x] Update StudentSidebar.jsx to include AI Assistant menu item
+## Steps:
+- [ ] Step 1: Update backend/src/routes/recommendation.routes.js to query Class model matching user.interests category
+- [ ] Step 2: Restart backend server
+- [ ] Step 3: Test - Teacher create 'Baking' class → Student select 'Baking' interest → Verify shows in StudentHome 'Recommended for you'
+- [ ] Step 4: Complete task
 
-## Backend
-- [x] Add POST /chat route in backend/src/routes/ai.routes.js
-- [x] Add chatWithAI function in backend/src/controllers/ai.controller.js
-
-## Testing
-- [ ] Start backend server
-- [ ] Start frontend development server
-- [ ] Test the AI Chatbot functionality

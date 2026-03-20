@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../models/user.model");
-const Course = require("../models/course.model");
+const Class = require("../models/class.model");
 const authMiddleware = require("../middleware/auth.middleware");
 
 router.get("/", authMiddleware, async (req, res) => {
@@ -21,13 +21,13 @@ console.log("INTERESTS:", user.interests);
     console.log("User interests:", user.interests);
 
     // ✅ Match courses
-    const courses = await Course.find({
+    const classes = await Class.find({
       category: { $in: user.interests }
-    });
+    }).populate('instructor', 'name').sort({ createdAt: -1 });
 
-    console.log("Recommended courses:", courses);
+    console.log("Recommended classes:", classes);
 
-    res.json(courses);
+    res.json(classes);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching recommendations" });

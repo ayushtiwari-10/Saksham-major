@@ -304,18 +304,29 @@ const sendMessage = async (req, res) => {
 // Create a new class (teacher only)
 const createClass = async (req, res) => {
   try {
-    // assume auth middleware sets req.user = { id, ... }
     const teacherId = req.user && req.user.id;
     if (!teacherId) return res.status(401).json({ message: "Unauthorized" });
 
-    const { title, description, image, price, category } = req.body;
+    const { title, description, price, category } = req.body;
     if (!title) return res.status(400).json({ message: "Title is required" });
+
+    let image = req.body.imageUrl || '';
+    if (req.file) {
+      try {
+        const buffer = fs.readFileSync(req.file.path);
+        const result = await uploadThumbnail(buffer);
+        image = result.secure_url;
+      } catch (uploadErr) {
+        console.log('Cloudinary upload failed, using placeholder', uploadErr);
+        image = 'https://via.placeholder.com/400x250?text=No+Image';
+      }
+    }
 
     const newClass = new Class({
       title,
       description,
       image,
-      price: price || 0,
+      price: Number(price) || 0,
       category: category || "General",
       instructor: teacherId,
     });

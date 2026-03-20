@@ -1,4 +1,3 @@
-// frontend/src/pages/TeacherDashboard/components/AddClassModal.jsx
 import React, { useState } from "react";
 import "./AddClassModal.css";
 
@@ -9,7 +8,7 @@ const initial = {
   description: "",
   imageUrl: "",
   capacity: "",
-  mode: "online", // online / offline / hybrid
+  mode: "online",
   startTime: "",
   durationMinutes: "",
 };
@@ -33,116 +32,122 @@ export default function AddClassModal({ open, onClose, onCreated }) {
     return null;
   };
 
+  const handleThumbnailUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setForm((p) => ({ ...p, thumbnailFile: file, imageUrl: url }));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     const v = validate();
     if (v) return setError(v);
 
     try {
       setLoading(true);
+      const fd = new FormData();
+      fd.append("title", form.title);
+      fd.append("category", form.category);
+      fd.append("priceINR", form.priceINR);
+      fd.append("description", form.description);
+      fd.append("capacity", form.capacity || "0");
+      fd.append("mode", form.mode);
+      fd.append("startTime", form.startTime);
+      fd.append("durationMinutes", form.durationMinutes || "0");
+      if (form.thumbnailFile) fd.append("image", form.thumbnailFile);
+      else if (form.imageUrl) fd.append("imageUrl", form.imageUrl);
+
       const token = localStorage.getItem("token");
-      const res = await fetch("/api/teacher/classes", {
+      const res = await fetch("http://localhost:5000/api/teacher/classes", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          title: form.title,
-          category: form.category,
-          priceINR: Number(form.priceINR),
-          description: form.description,
-          imageUrl: form.imageUrl,
-          capacity: Number(form.capacity || 0),
-          mode: form.mode,
-          startTime: form.startTime || null,
-          durationMinutes: Number(form.durationMinutes || 0),
-        }),
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: fd,
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to create class");
-      // created
       setForm(initial);
-      onCreated && onCreated(data.class || data);
-      onClose && onClose();
+      onCreated?.(data.class || data);
+      onClose?.();
     } catch (err) {
-      setError(err.message || "Server error");
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="acm-overlay" onClick={onClose}>
-      <div className="acm-modal" onClick={(e) => e.stopPropagation()}>
-        <header className="acm-header">
-          <h3>Create new class</h3>
-          <button className="acm-close" onClick={onClose}>✕</button>
-        </header>
-
-        <form className="acm-form" onSubmit={handleSubmit}>
-          <label>
-            Title
-            <input name="title" value={form.title} onChange={handleChange} placeholder="e.g., Baking Basics" />
-          </label>
-
-          <label>
-            Category
-            <input name="category" value={form.category} onChange={handleChange} placeholder="Cooking, Craft, Music..." />
-          </label>
-
-          <label className="acm-row">
-            <div>
-              Price (₹)
-              <input name="priceINR" value={form.priceINR} onChange={handleChange} type="number" placeholder="e.g., 499" />
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <h3>Create New Course</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        <form className="modal-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Title *</label>
+            <input name="title" value={form.title} onChange={handleChange} placeholder="e.g. Baking Basics" required />
+          </div>
+          <div className="form-group">
+            <label>Category *</label>
+            <input name="category" value={form.category} onChange={handleChange} placeholder="Baking" required />
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label>Price (₹)</label>
+              <input name="priceINR" type="number" value={form.priceINR} onChange={handleChange} placeholder="499" />
             </div>
-            <div>
-              Capacity
-              <input name="capacity" value={form.capacity} onChange={handleChange} type="number" placeholder="e.g., 20" />
+            <div className="form-group">
+              <label>Capacity</label>
+              <input name="capacity" type="number" value={form.capacity} onChange={handleChange} placeholder="20" />
             </div>
-          </label>
-
-          <label>
-            Mode
-            <select name="mode" value={form.mode} onChange={handleChange}>
-              <option value="online">Online</option>
-              <option value="offline">Offline</option>
-              <option value="hybrid">Hybrid</option>
-            </select>
-          </label>
-
-          <label className="acm-row">
-            <div>
-              Start Date/Time
-              <input name="startTime" value={form.startTime} onChange={handleChange} type="datetime-local" />
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label>Mode</label>
+              <select name="mode" value={form.mode} onChange={handleChange}>
+                <option value="online">Online</option>
+                <option value="offline">Offline</option>
+                <option value="hybrid">Hybrid</option>
+              </select>
             </div>
-            <div>
-              Duration (mins)
-              <input name="durationMinutes" value={form.durationMinutes} onChange={handleChange} type="number" placeholder="e.g., 90" />
+            <div className="form-group">
+              <label>Duration (min)</label>
+              <input name="durationMinutes" type="number" value={form.durationMinutes} onChange={handleChange} placeholder="90" />
             </div>
-          </label>
-
-          <label>
-            Image URL (thumbnail)
-            <input name="imageUrl" value={form.imageUrl} onChange={handleChange} placeholder="Paste image URL (or leave blank)" />
-            <small className="acm-hint">Use an image URL for now; we’ll add uploads later.</small>
-          </label>
-
-          <label>
-            Description
-            <textarea name="description" value={form.description} onChange={handleChange} rows="4" placeholder="Write short description..."></textarea>
-          </label>
-
-          {error && <div className="acm-error">{error}</div>}
-
-          <div className="acm-actions">
-            <button type="button" className="acm-btn ghost" onClick={onClose} disabled={loading}>Cancel</button>
-            <button type="submit" className="acm-btn primary" disabled={loading}>{loading ? "Creating..." : "Create Class"}</button>
+          </div>
+          <div className="form-group">
+            <label>Thumbnail Upload</label>
+            <div className="upload-area">
+              <input type="file" accept="image/*" onChange={handleThumbnailUpload} />
+              <label htmlFor="thumbnail" className="upload-btn">📁 Upload Image</label>
+              {form.imageUrl && (
+                <div className="preview">
+                  <img src={form.imageUrl} alt="Preview" />
+                </div>
+              )}
+              <small>Or paste URL below</small>
+              <input name="imageUrl" value={form.imageUrl} onChange={handleChange} placeholder="https://image.url" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label>Description</label>
+            <textarea name="description" value={form.description} onChange={handleChange} rows="4" />
+          </div>
+          {error && <div className="error">{error}</div>}
+          <div className="form-actions">
+            <button type="button" className="btn-secondary" onClick={onClose} disabled={loading}>
+              Cancel
+            </button>
+            <button type="submit" className="btn-primary" disabled={loading}>
+              {loading ? "Creating..." : "Create Course"}
+            </button>
           </div>
         </form>
       </div>
     </div>
   );
 }
+
