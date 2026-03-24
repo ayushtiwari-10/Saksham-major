@@ -63,11 +63,12 @@ const Signup = () => {
         <button className="back-btn" onClick={() => navigate('/')}>
           ←
         </button>
-        <h1 className="logo">saksham</h1>
-        <h2>Create your account</h2>
+        <div className="signup-content">
+          <h1 className="logo">saksham</h1>
+          <h2>Create your account</h2>
 
 
-        <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
@@ -136,6 +137,7 @@ const Signup = () => {
           </span>
         </p>
       </div>
+    </div>
 
       <div className="signup-right">
         <img
