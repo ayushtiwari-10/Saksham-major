@@ -17,44 +17,6 @@ const Topbar = ({ title = "Dashboard" }) => {
     minute: "2-digit",
   });
 
-  const [open, setOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  const toggleDropdown = () => setOpen(!open);
-
-  // CLOSE IF CLICKED OUTSIDE
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  // NAVIGATION FUNCTIONS
-  const goToProfile = () => {
-    navigate("/teacher/dashboard/profile");
-    setOpen(false);
-  };
-
-  const goToEditProfile = () => {
-    navigate("/teacher/dashboard/profile");
-    setOpen(false);
-  };
-
-  const goToPayoutSettings = () => {
-    navigate("/teacher/dashboard/payout-settings");
-    setOpen(false);
-  };
-
-  const switchRole = () => {
-    localStorage.setItem("role", "student");
-    navigate("/student/dashboard");
-    setOpen(false);
-  };
-
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -83,30 +45,6 @@ const Topbar = ({ title = "Dashboard" }) => {
 
           <button className="cart-btn">🛒</button>
 
-          {/* PROFILE */}
-          <div className="profile-wrapper" ref={dropdownRef}>
-            <img
-              src="/default-avatar.png"
-              alt="profile"
-              className="avatar"
-              onClick={toggleDropdown}
-            />
-
-            {open && (
-              <div className="profile-dropdown">
-
-                <h4>My Account</h4>
-
-                <button onClick={goToProfile}>View Profile</button>
-                <button onClick={goToEditProfile}>Edit Profile</button>
-                <button onClick={goToPayoutSettings}>Payout Settings</button>
-                <button onClick={switchRole}>Switch to Student</button>
-                <button className="logout" onClick={logout}>Logout</button>
-
-              </div>
-            )}
-
-          </div>
         </div>
       </div>
     </header>
