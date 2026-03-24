@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const authenticate = require('../middleware/auth.middleware');
 const {
+  getRecommendedClasses,
+  getPublicClasses,
   getDashboard,
   getNotices,
   createNotice,
@@ -42,7 +44,7 @@ router.post('/schedule', authenticate, addEvent);
 
 // Videos
 router.get('/videos', authenticate, getVideos);
-router.post('/videos', authenticate, upload.fields([{ name: 'video' }, { name: 'thumbnail' }]), uploadVideo);
+router.post('/videos', authenticate, upload.fields([{ name: 'video', maxCount: 1 }, { name: 'thumbnail', maxCount: 1 }]), uploadVideo);
 router.put('/videos/:id', authenticate, updateVideo);
 router.delete('/videos/:id', authenticate, deleteVideo);
 
@@ -51,6 +53,8 @@ router.get('/messages', authenticate, getMessages);
 router.post('/messages', authenticate, sendMessage);
 
 // Classes
+router.get('/classes', getPublicClasses); // public
+router.get('/classes/recommended', getRecommendedClasses); // interests query
 router.post('/classes', authenticate, upload.single('image'), createClass);
 router.get('/classes/my', authenticate, getMyClasses);
 
