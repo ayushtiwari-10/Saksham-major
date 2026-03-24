@@ -1,4 +1,3 @@
-// frontend/src/pages/TeacherDashboard/DashboardHome.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Topbar from "../../components/Topbar";
@@ -16,22 +15,21 @@ const DashboardHome = () => {
   const [newNoticeText, setNewNoticeText] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
 
+  const loadClasses = async () => {
+    try {
+      console.log('Loading classes...');
+      const resp = await getMyClassesApi();
+      console.log('Classes response:', resp);
+      const classList = resp.classes || resp || [];
+      setClasses(Array.isArray(classList) ? classList : []);
+    } catch (err) {
+      console.error('Load classes failed:', err);
+      setClasses([]);
+    }
+  };
+
   useEffect(() => {
-    // load from backend if token exists; else fallback to sample
-    const load = async () => {
-      try {
-        const resp = await getMyClassesApi();
-        if (resp && resp.classes) setClasses(resp.classes);
-      } catch (err) {
-        // fallback demo classes if fetch fails
-        setClasses([
-          { id: "c1", title: "Knitting Basics", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR55RFQw9Jn7yKwyG66HNJz0hjK5NJ6DbShxA&s", progress: 39, students: 24 },
-          { id: "c2", title: "Baking Essentials", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200", progress: 64, students: 12 },
-          { id: "c3", title: "Handmade Crafts", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA_ilWPvU_PRjT4m5AaawZJ_VSn19bRuKfcg&s", progress: 12, students: 6 },
-        ]);
-      }
-    };
-    load();
+    loadClasses();
 
     // notices from local storage
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -53,8 +51,14 @@ const DashboardHome = () => {
   const closeAdd = () => setShowAddModal(false);
 
   // called when new class is created (from modal)
-  const onClassCreated = (createdClass) => {
-    setClasses(prev => [createdClass, ...prev]);
+  const onClassCreated = async (createdClass) => {
+    console.log('Class created:', createdClass);
+    setClasses(prev => {
+      const newClasses = [createdClass, ...prev];
+      return newClasses;
+    });
+    // refetch
+    await loadClasses();
   };
 
   return (
@@ -64,35 +68,41 @@ const DashboardHome = () => {
         <div className="teacher-content">
           <section className="classes-section">
             <div className="classes-header">
-              <h3>My Classes</h3>
+              <h3>My Classes ({classes.length})</h3>
               <div className="classes-actions">
                 <button className="add-class-btn" onClick={openAdd}>＋</button>
               </div>
             </div>
 
-            <div className="classes-grid">
-              {classes.map((c) => (
-                <article key={c._id || c.id} className="class-card">
-                  <div className="card-top" style={{ backgroundImage: `url(${c.image || c.imageUrl || "https://via.placeholder.com/600x300"})` }} />
-                  <div className="card-body">
-                    <h4>{c.title}</h4>
-                    <div className="meta-row">
-                      <div className="students">{c.students ?? "—"} students</div>
-                      <div className="progress-mini">
-                        <div className="progress-track">
-                          <div className="progress-value" style={{ width: `${c.progress ?? 0}%` }} />
+            {classes.length === 0 ? (
+              <div className="empty-classes">
+                <p>No classes yet. Create your first class!</p>
+              </div>
+            ) : (
+              <div className="classes-grid">
+                {classes.map((c, index) => (
+                  <article key={c._id || c.id || index} className="class-card">
+                    <div className="card-top" style={{ backgroundImage: `url(${c.image || c.imageUrl || "https://via.placeholder.com/600x300?text=No+Image"})` }} />
+                    <div className="card-body">
+                      <h4>{c.title}</h4>
+                      <div className="meta-row">
+                        <div className="students">{c.students || 0} students</div>
+                        <div className="progress-mini">
+                          <div className="progress-track">
+                            <div className="progress-value" style={{ width: `${c.progress || 0}%` }} />
+                          </div>
+                          <small>{c.progress || 0}%</small>
                         </div>
-                        <small>{c.progress ?? 0}%</small>
+                      </div>
+                      <div className="card-actions">
+                        <button className="btn ghost">View</button>
+                        <button className="btn primary">Analytics</button>
                       </div>
                     </div>
-                    <div className="card-actions">
-                      <button className="btn ghost">View</button>
-                      <button className="btn primary">Analytics</button>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </section>
 
           <aside className="notice-section">

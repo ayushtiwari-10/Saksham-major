@@ -4,7 +4,7 @@ export const uploadProfilePic = async (file) => {
   data.append("upload_preset", "saksham_preset"); // make this in cloudinary
 
   const res = await fetch(
-    "https://api.cloudinary.com/v1_1/<your-cloud-name>/image/upload",
+    "https://api.cloudinary.com/v1_1/do4bcgwvl/image/upload",
     { method: "POST", body: data }
   );
 

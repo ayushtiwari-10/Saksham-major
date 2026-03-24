@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import "./AddClassModal.css";
 
+const CATEGORIES = [
+  'Music', 'Dance', 'Art & Craft', 'Cooking', 'Coding', 'Fitness', 'Yoga', 'Photography', 'Business', 'Languages', 
+  'Beauty & Makeup', 'Digital Marketing', 'Career Skills', 'Home Décor', 'Sewing & Tailoring', 'Acting', 'Finance', 
+  'Writing', 'Gardening', 'Public Speaking'
+];
+
 const initial = {
   title: "",
   category: "",
@@ -9,6 +15,7 @@ const initial = {
   imageUrl: "",
   capacity: "",
   mode: "online",
+  location: "",
   startTime: "",
   durationMinutes: "",
 };
@@ -29,6 +36,7 @@ export default function AddClassModal({ open, onClose, onCreated }) {
     if (!form.title.trim()) return "Title is required";
     if (!form.category.trim()) return "Category is required";
     if (!form.priceINR || Number(form.priceINR) < 0) return "Enter valid price";
+    if (form.mode !== 'online' && !form.location.trim()) return "Location required for offline/hybrid";
     return null;
   };
 
@@ -50,10 +58,11 @@ export default function AddClassModal({ open, onClose, onCreated }) {
       const fd = new FormData();
       fd.append("title", form.title);
       fd.append("category", form.category);
-      fd.append("priceINR", form.priceINR);
+      fd.append("price", form.priceINR);
       fd.append("description", form.description);
       fd.append("capacity", form.capacity || "0");
       fd.append("mode", form.mode);
+      fd.append("location", form.location);
       fd.append("startTime", form.startTime);
       fd.append("durationMinutes", form.durationMinutes || "0");
       if (form.thumbnailFile) fd.append("image", form.thumbnailFile);
@@ -92,7 +101,10 @@ export default function AddClassModal({ open, onClose, onCreated }) {
           </div>
           <div className="form-group">
             <label>Category *</label>
-            <input name="category" value={form.category} onChange={handleChange} placeholder="Baking" required />
+            <select name="category" value={form.category} onChange={handleChange} required>
+              <option value="">Select category</option>
+              {CATEGORIES.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+            </select>
           </div>
           <div className="form-row">
             <div className="form-group">
@@ -106,7 +118,7 @@ export default function AddClassModal({ open, onClose, onCreated }) {
           </div>
           <div className="form-row">
             <div className="form-group">
-              <label>Mode</label>
+              <label>Mode *</label>
               <select name="mode" value={form.mode} onChange={handleChange}>
                 <option value="online">Online</option>
                 <option value="offline">Offline</option>
@@ -114,15 +126,25 @@ export default function AddClassModal({ open, onClose, onCreated }) {
               </select>
             </div>
             <div className="form-group">
+              <label>Location (offline/hybrid)</label>
+              <input name="location" value={form.location} onChange={handleChange} placeholder="City, Area" />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group">
               <label>Duration (min)</label>
               <input name="durationMinutes" type="number" value={form.durationMinutes} onChange={handleChange} placeholder="90" />
+            </div>
+            <div className="form-group">
+              <label>Start Time</label>
+              <input name="startTime" type="time" value={form.startTime} onChange={handleChange} />
             </div>
           </div>
           <div className="form-group">
             <label>Thumbnail Upload</label>
             <div className="upload-area">
               <input type="file" accept="image/*" onChange={handleThumbnailUpload} />
-              <label htmlFor="thumbnail" className="upload-btn">📁 Upload Image</label>
+              <label className="upload-btn">📁 Upload Image</label>
               {form.imageUrl && (
                 <div className="preview">
                   <img src={form.imageUrl} alt="Preview" />

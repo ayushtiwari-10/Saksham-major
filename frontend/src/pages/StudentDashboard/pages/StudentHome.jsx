@@ -5,7 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import VriddhiWidget from "../../../components/VriddhiWidget";
 import { AuthContext } from "../../../contexts/AuthContext";
-import API from "../../../services/api"; // ✅ ADDED
+import { getRecommendedClassesApi } from "../../../services/classService";
 import "./StudentHome.css";
 
 const SAMPLE_COURSES = new Array(8).fill(0).map((_, i) => ({
@@ -66,39 +66,26 @@ const userIcon = new L.Icon({
 const StudentHome = () => {
   const { user } = useContext(AuthContext);
 
-  const [activeTab, setActiveTab] = useState("New");
-  const [courseFilter, setCourseFilter] = useState("Active");
-  const [userLocation, setUserLocation] = useState({
-    lat: 22.7196,
-    lng: 75.8577,
-  });
+  const [userLocation, setUserLocation] = useState({ lat: 22.7196, lng: 75.8577 });
+  const [recommendedClasses, setRecommendedClasses] = useState([]);
 
-  // ✅ NEW STATE (for recommendations)
-  const [recommendedCourses, setRecommendedCourses] = useState([]);
-
-  // 📍 Geolocation
+  // Geolocation
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        setUserLocation({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude,
-        });
+        setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
       });
     }
   }, []);
 
-  // ✅ FETCH RECOMMENDATIONS
+  // Fetch recommended
   useEffect(() => {
-    API.get("/recommendations")
-      .then((res) => {
-        console.log("Recommendations:", res.data);
-        setRecommendedCourses(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching recommendations", err);
-      });
-  }, []);
+    if (user?.interests?.length > 0) {
+      getRecommendedClassesApi(user.interests)
+        .then((data) => setRecommendedClasses(data.classes || []))
+        .catch(console.error);
+    }
+  }, [user?.interests]);
 
   return (
     <div className="student-content">
@@ -208,22 +195,26 @@ const StudentHome = () => {
         </div>
       </div>
 
-      {/* Recommended Section */}
-      <h3 className="section-title">Recommended for you</h3>
-
+      {/* Recommended Classes */}
+      <h3 className="section-title">Recommended Classes for you</h3>
       <div className="recommended-scroll">
-        {recommendedCourses.length === 0 ? (
-          <p>No recommendations yet</p>
+        {recommendedClasses.length === 0 ? (
+          <p>No classes matching your interests yet. Check Explore!</p>
         ) : (
-          recommendedCourses.map((c, index) => (
-            <div className="rec-card" key={index}>
+          recommendedClasses.map((cls) => (
+            <div className="rec-card" key={cls._id}>
               <img
-                src={c.image || "https://via.placeholder.com/150"}
+                src={cls.image || "https://via.placeholder.com/150"}
                 alt=""
                 className="rec-img"
               />
-              <div className="rec-title">{c.title}</div>
-              <button className="btn primary">View</button>
+              <div className="rec-title">{cls.title}</div>
+              <div className="rec-meta">
+                <span>{cls.category}</span>
+                <span>{cls.mode}</span>
+                {cls.price > 0 && <span>₹{cls.price}</span>}
+              </div>
+              <button className="btn primary">View Class</button>
             </div>
           ))
         )}

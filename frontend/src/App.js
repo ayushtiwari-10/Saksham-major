@@ -39,6 +39,7 @@ import TeacherDashboard from "./pages/TeacherDashboard/TeacherDashboard";
 
 // Teacher Pages
 import DashboardHome from "./pages/TeacherDashboard/DashboardHome";
+
 import Chatbox from "./pages/TeacherDashboard/sections/Chatbox";
 import TeacherVideos from "./pages/TeacherDashboard/sections/TeacherVideos";
 import TeacherSchedule from "./pages/TeacherDashboard/sections/TeacherSchedule";
@@ -54,7 +55,6 @@ import KYCUpload from "./pages/TeacherDashboard/sections/Profile/KYCUpload";
 
 // Floating AI Chatbot
 import FloatingAIChatbot from "./components/FloatingAIChatbot";
-
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -101,6 +101,7 @@ function App() {
           {/* TEACHER DASHBOARD */}
           <Route path="/teacher/dashboard" element={<ProtectedRoute><TeacherDashboard /></ProtectedRoute>}>
             <Route index element={<DashboardHome />} />
+
             <Route path="chatbox" element={<Chatbox />} />
             <Route path="videos" element={<TeacherVideos />} />
             <Route path="schedule" element={<TeacherSchedule />} />

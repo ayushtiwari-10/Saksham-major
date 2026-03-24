@@ -1,16 +1,14 @@
 // frontend/src/services/classService.js
-const API_BASE = process.env.REACT_APP_API_URL || ""; // if you use proxy in package.json, leave empty
+const API_BASE = process.env.REACT_APP_API_URL || ''; // proxy
 
-export async function createClassApi(payload) {
-  // expects payload: { title, description, image, price, category }
-  const token = localStorage.getItem("token"); // adjust if you store token differently
+export async function createClassApi(formData) {
+  const token = localStorage.getItem("token");
   const res = await fetch(`${API_BASE}/api/teacher/classes`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
-    body: JSON.stringify(payload),
+    body: formData, // FormData - no Content-Type
   });
 
   if (!res.ok) {
@@ -23,13 +21,24 @@ export async function createClassApi(payload) {
 export async function getMyClassesApi() {
   const token = localStorage.getItem("token");
   const res = await fetch(`${API_BASE}/api/teacher/classes/my`, {
-    method: "GET",
-    headers: {
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
-  if (!res.ok) {
-    throw new Error("Failed fetching classes");
-  }
+  if (!res.ok) throw new Error("Failed fetching classes");
+  return res.json();
+}
+
+export async function getRecommendedClassesApi(interests) {
+  const token = localStorage.getItem("token");
+  const params = new URLSearchParams({ interests: interests.join(',') });
+  const res = await fetch(`${API_BASE}/api/teacher/classes/recommended?${params}`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+  if (!res.ok) throw new Error("Failed fetching recommendations");
+  return res.json();
+}
+
+export async function getPublicClassesApi() {
+  const res = await fetch(`${API_BASE}/api/teacher/classes`);
+  if (!res.ok) throw new Error("Failed fetching classes");
   return res.json();
 }
