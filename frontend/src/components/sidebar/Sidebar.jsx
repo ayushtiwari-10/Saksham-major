@@ -23,10 +23,10 @@ const Sidebar = ({ role = "student" }) => {
   const menus = {
     student: [
       { label: "Dashboard", path: "/student/dashboard" },
+      { label: "Offline Classes", path: "/student/dashboard/offline" },
       { label: "My Courses", path: "/student/dashboard/courses" },
       { label: "My Library", path: "/student/dashboard/library" },
       { label: "Explore", path: "/student/dashboard/explore" },
-      { label: "Offline Classes", path: "/student/dashboard/offline" },
       { label: "ChatBox", path: "/student/dashboard/chatbox" },
       { label: "Logout", onClick: "logout" },
       { label: "Switch to Teacher", action: "switchToTeacher" },

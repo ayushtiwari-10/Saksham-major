@@ -42,24 +42,41 @@
   opacity: 0.9;
 }
 
-/* Filters */
+/* Level Filter Buttons - Improved Matte Style */
 .level-filter {
   margin: 24px 0 10px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .level-pill {
-  padding: 6px 18px;
-  border-radius: 20px;
-  background: #f2f3f7;
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: 1px solid #ddd;
+  background: #f8f9fa;
+  color: #1e293b;
   cursor: pointer;
-  border: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  font-family: "Outfit", sans-serif;
+}
+
+.level-pill:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
 }
 
 .level-pill.active {
-  background: var(--sx-primary);
-  color: #fff;
+  background: #0f766e;
+  color: white;
+  border-color: #0f766e;
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.2);
+}
+
+.level-pill.active:hover {
+  background: #0d6961;
+  box-shadow: 0 6px 16px rgba(15, 118, 110, 0.3);
 }
 
 /* Trending Cards Grid */
