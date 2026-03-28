@@ -20,7 +20,9 @@ const DashboardHome = () => {
       console.log('Loading classes...');
       const resp = await getMyClassesApi();
       console.log('Classes response:', resp);
-      const classList = resp.classes || resp || [];
+      
+      // The API returns { success: true, message: '...', data: { classes: [...] } }
+      const classList = resp?.data?.classes || resp?.classes || (Array.isArray(resp) ? resp : []);
       setClasses(Array.isArray(classList) ? classList : []);
     } catch (err) {
       console.error('Load classes failed:', err);

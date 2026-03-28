@@ -11,7 +11,10 @@ const MyClasses = () => {
 
   useEffect(() => {
     getMyClassesApi()
-      .then(data => setClasses(data.classes || []))
+      .then(resp => {
+        const classList = resp?.data?.classes || resp?.classes || (Array.isArray(resp) ? resp : []);
+        setClasses(Array.isArray(classList) ? classList : []);
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
