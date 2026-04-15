@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Topbar from "../../components/Topbar";
 import NoticeItem from "./NoticeItem";
 import AddClassModal from "../../components/AddClassModal";
@@ -9,7 +8,6 @@ import "./TeacherDashboard.css";
 const STORAGE_KEY = "saksham_teacher_notices_v1";
 
 const DashboardHome = () => {
-  const navigate = useNavigate();
   const [classes, setClasses] = useState([]);
   const [notices, setNotices] = useState([]);
   const [newNoticeText, setNewNoticeText] = useState("");
@@ -143,3 +141,4 @@ const DashboardHome = () => {
 };
 
 export default DashboardHome;
+

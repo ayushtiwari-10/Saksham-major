@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Topbar from "../../../components/Topbar";
 import "./Chatbox.css";
 
 const Chatbox = () => {
-  const navigate = useNavigate();
   const [activeChat, setActiveChat] = useState(null);
 
   const handleNavigate = (section) => {
@@ -15,7 +13,7 @@ const Chatbox = () => {
       "ChatBox": "/teacher/dashboard/chatbox",
       "Finances": "/teacher/dashboard/finances" // assuming a route for finances
     };
-    navigate(routes[section] || "/teacher/dashboard");
+    window.location.href = routes[section] || "/teacher/dashboard";
   };
 
   const people = [
@@ -41,9 +39,7 @@ const Chatbox = () => {
               {people.map((p) => (
                 <div
                   key={p.id}
-                  className={`chat-item ${
-                    activeChat === p.id ? "active" : ""
-                  }`}
+                  className={`chat-item ${activeChat === p.id ? "active" : ""}`}
                   onClick={() => setActiveChat(p.id)}
                 >
                   <div className="chat-icon">👤</div>
@@ -98,3 +94,4 @@ const Chatbox = () => {
 };
 
 export default Chatbox;
+

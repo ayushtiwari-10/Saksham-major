@@ -3,13 +3,11 @@ import { getHistory } from '../../../utils/vriddhi';
 
 const StudentTransactions = () => {
   const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchHistory = async () => {
       const history = await getHistory();
       setTransactions(history);
-      setLoading(false);
     };
     fetchHistory();
   }, []);
@@ -40,3 +38,4 @@ const StudentTransactions = () => {
 };
 
 export default StudentTransactions;
+
