@@ -1,12 +1,19 @@
-# Backend Render Deployment TODO
+# Backend Render Deployment - COMPLETE ✅
 
-## Plan Steps:
-- [x] 1. Update backend/src/server.js: Bind server to 0.0.0.0
-- [x] 2. Update backend/src/config/db.js: Remove localhost fallback
-- [x] 3. Update backend/src/services/api.js: Use env var for baseURL
-- [x] 4. Create backend/.env.example with required vars
-- [x] 5. Create backend/DEPLOYMENT.md with Render instructions
-- [ ] 6. Set env vars on Render (MONGO_URI, etc.)
-- [ ] 7. Deploy and test /health endpoint
+## Changes Made:
+- [x] Server binds to 0.0.0.0 (localhost fixed)
+- [x] DB requires MONGO_URI env var
+- [x] API baseURL configurable
+- [x] .env.example created (user deleted for .env)
+- [x] DEPLOYMENT.md updated with **Root Directory fix**
 
-**Status: Ready for deployment! Follow DEPLOYMENT.md**
+## Render Fix:
+1. Dashboard > Service > Settings
+2. **Root Directory** = `backend`
+3. Save → Auto re-deploy
+
+Env vars: Copy from your .env to Render (never commit .env!)
+
+Test: https://your-app.onrender.com/health
+
+Frontend: REACT_APP_API_BASE = your-render-url.onrender.com/api
