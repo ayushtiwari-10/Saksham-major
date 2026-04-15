@@ -4,7 +4,7 @@ import Topbar from "../../../components/Topbar";
 import { authService } from "../../../services/auth.service";
 import "./TeacherSchedule.css";
 
-const sampleEvents = {
+// const sampleEvents = {
   // keyed by ISO date (yyyy-mm-dd)
   "2025-08-26": [
     { id: "e1", time: "07:00 AM", title: "Morning Class-1" },
@@ -25,7 +25,7 @@ function isoDate(d) {
 
 const TeacherSchedule = () => {
   const navigate = useNavigate();
-  const [activeSection] = useState("Schedule");
+  // const [activeSection] = useState("Schedule");
   const [today, setToday] = useState(new Date());
   const [month, setMonth] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
   const [events, setEvents] = useState({});
@@ -57,7 +57,7 @@ const TeacherSchedule = () => {
     fetchSchedule();
   }, []);
 
-  const handleNavigate = (section) => {
+  // const handleNavigate = (section) => {
     const routes = {
       "Dashboard": "/teacher/dashboard",
       "My Videos": "/teacher/dashboard/videos",

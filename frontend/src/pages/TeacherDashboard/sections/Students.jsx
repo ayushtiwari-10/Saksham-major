@@ -6,7 +6,7 @@ import "./Students.css";
 const Students = () => {
   const navigate = useNavigate();
 
-  const handleNavigate = (section) => {
+  // const handleNavigate = (section) => {
     const routes = {
       Dashboard: "/teacher/dashboard",
       "My Videos": "/teacher/dashboard/videos",

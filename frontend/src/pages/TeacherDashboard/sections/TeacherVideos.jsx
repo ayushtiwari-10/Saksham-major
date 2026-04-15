@@ -14,7 +14,7 @@ import "./TeacherVideos.css";
  * Replace TODOs with your backend endpoints (e.g., /api/teacher/videos)
  */
 
-const sampleVideos = [
+// const sampleVideos = [
   {
     id: "v1",
     title: "Knitting - Basics",
@@ -70,7 +70,7 @@ const TeacherVideos = () => {
     thumbnailPreview: null,
   });
 
-  const handleNavigate = (section) => {
+  // const handleNavigate = (section) => {
     const routes = {
       "Dashboard": "/teacher/dashboard",
       "My Videos": "/teacher/dashboard/videos",
