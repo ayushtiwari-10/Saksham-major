@@ -1,4 +1,12 @@
 {
+  "name": "saksham",
+  "version": "1.0.0",
+  "scripts": {
+    "backend": "cd backend && npm start",
+    "backend:dev": "cd backend && npm run dev",
+    "start": "npm run backend",
+    "dev": "npm run backend:dev"
+  },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "leaflet": "^1.9.4",
