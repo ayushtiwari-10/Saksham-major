@@ -32,7 +32,7 @@ const getRecommendedClasses = async (req, res) => {
       .populate('instructor', 'name avatar')
       .limit(8)
       .sort({ createdAt: -1 });
-    res.status(200).json(successResponse({ classes }));
+    res.status(200).json({ success: true, classes });
   } catch (error) {
     res.status(500).json(errorResponse('Failed to fetch recommended classes'));
   }

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./AddClassModal.css";
 
 const CATEGORIES = [
-  'Music', 'Dance', 'Art & Craft', 'Cooking', 'Coding', 'Fitness', 'Yoga', 'Photography', 'Business', 'Languages', 
-  'Beauty & Makeup', 'Digital Marketing', 'Career Skills', 'Home Décor', 'Sewing & Tailoring', 'Acting', 'Finance', 
-  'Writing', 'Gardening', 'Public Speaking'
+  "Cooking", "Sewing & Stitching", "Makeup & Beauty", "Yoga & Fitness", 
+  "Arts & Crafts", "Home Gardening", "Baking", "Dance", "Teaching Kids", 
+  "Handmade Products", "Coding Basics", "Social Media Skills", "General"
 ];
 
 const initial = {
