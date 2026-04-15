@@ -1,10 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Topbar from "../../../components/Topbar";
 import "./Students.css";
 
 const Students = () => {
-  const navigate = useNavigate();
 
   const students = [
     {
@@ -86,3 +84,4 @@ const Students = () => {
 };
 
 export default Students;
+

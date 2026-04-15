@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Topbar from "../../../components/Topbar";
 import VideoCard from "../../../components/VideoCard";
 import { authService } from "../../../services/auth.service";
@@ -15,7 +14,6 @@ import "./TeacherVideos.css";
  */
 
 const TeacherVideos = () => {
-  const navigate = useNavigate();
   const [active, setActive] = useState("myvideos");
 
   const [videos, setVideos] = useState([]);
@@ -195,3 +193,4 @@ const TeacherVideos = () => {
 };
 
 export default TeacherVideos;
+

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Topbar from "../../../components/Topbar";
 import { authService } from "../../../services/auth.service";
 import "./TeacherSchedule.css";
@@ -11,7 +10,6 @@ function isoDate(d) {
 }
 
 const TeacherSchedule = () => {
-  const navigate = useNavigate();
   const [today, setToday] = useState(new Date());
   const [month, setMonth] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
   const [events, setEvents] = useState({});
@@ -213,3 +211,4 @@ const TeacherSchedule = () => {
 };
 
 export default TeacherSchedule;
+
