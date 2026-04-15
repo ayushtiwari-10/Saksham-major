@@ -6,18 +6,6 @@ import "./Students.css";
 const Students = () => {
   const navigate = useNavigate();
 
-  // const handleNavigate = (section) => {
-    const routes = {
-      Dashboard: "/teacher/dashboard",
-      "My Videos": "/teacher/dashboard/videos",
-      Schedule: "/teacher/dashboard/schedule",
-      ChatBox: "/teacher/dashboard/chatbox",
-      Finances: "/teacher/dashboard/finances",
-      Students: "/teacher/dashboard/students",
-    };
-    navigate(routes[section] || "/teacher/dashboard");
-  };
-
   const students = [
     {
       id: 1,
@@ -78,11 +66,7 @@ const Students = () => {
                   <td>{s.joined}</td>
 
                   <td>
-                    <span
-                      className={`status-badge ${
-                        s.status === "Active" ? "active" : "pending"
-                      }`}
-                    >
+                    <span className={`status-badge ${s.status === "Active" ? "active" : "pending"}`}>
                       {s.status}
                     </span>
                   </td>
