@@ -54,7 +54,6 @@ const CATEGORY_LIST = [
   { name: "Public Speaking", icon: "🎤", color: "#eaf1ff" },
 ];
 
-
 const StudentExplore = () => {
   const [levelFilter, setLevelFilter] = useState("All");
   const [search, setSearch] = useState("");
@@ -62,7 +61,6 @@ const StudentExplore = () => {
   const [trendingCourses, setTrendingCourses] = useState([]);
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     fetchCourses();
@@ -85,6 +83,10 @@ const StudentExplore = () => {
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return <div className="loading">Loading courses...</div>;
+  }
 
   return (
     <div className="explore-page">
@@ -150,6 +152,32 @@ const StudentExplore = () => {
         ))}
       </div>
 
+      {/* Recommended Courses */}
+      <h2 className="section-title">Recommended Courses</h2>
+      {recommendedCourses.length > 0 ? (
+        recommendedCourses.map((course) => (
+          <div key={course.id || Math.random()} className="explore-card">
+            <div className="explore-body">
+              <h3>{course.title || 'Recommended Course'}</h3>
+              <p>Personalized for you</p>
+              <button className="btn primary">View</button>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No recommendations yet. Explore more!</p>
+      )}
+
+      {/* CATEGORIES Section */}
+      <h2 className="section-title">Categories</h2>
+      <div className="categories-chips">
+        {CATEGORIES.map((cat) => (
+          <span key={cat} className="category-chip">
+            {cat}
+          </span>
+        ))}
+      </div>
+
       {/* Browse Categories */}
       <div className="categories-section">
         <div className="cat-top-row">
@@ -176,7 +204,6 @@ const StudentExplore = () => {
           ))}
         </div>
       </div>
-
 
       {/* Popular Teachers */}
       <h2 className="section-title" style={{ marginTop: 34 }}>

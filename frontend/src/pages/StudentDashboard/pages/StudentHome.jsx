@@ -89,6 +89,23 @@ const StudentHome = () => {
 
   return (
     <div className="student-content">
+      {/* My Active Courses */}
+      <h3 className="section-title">My Active Courses</h3>
+      <div className="my-courses-grid">
+        {SAMPLE_COURSES.map((course) => (
+          <div key={course.id} className="course-progress-card">
+            <img src={course.image} alt={course.title} />
+            <div>
+              <h4>{course.title}</h4>
+              <div className="progress-bar">
+                <div className="progress-fill" style={{ width: `${course.progress}%` }} />
+              </div>
+              <small>{course.progress}% complete</small>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Banner */}
       <div className="banner-wrapper">
         <div className="student-banner professional-banner">
@@ -224,3 +241,4 @@ const StudentHome = () => {
 };
 
 export default StudentHome;
+

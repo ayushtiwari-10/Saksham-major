@@ -11,7 +11,7 @@ const Chatbox = () => {
       "My Videos": "/teacher/dashboard/videos",
       "Schedule": "/teacher/dashboard/schedule",
       "ChatBox": "/teacher/dashboard/chatbox",
-      "Finances": "/teacher/dashboard/finances" // assuming a route for finances
+      "Finances": "/teacher/dashboard/finances" 
     };
     window.location.href = routes[section] || "/teacher/dashboard";
   };
@@ -27,6 +27,14 @@ const Chatbox = () => {
     <div className="chat-root">
       <div className="chat-main">
         <Topbar title="Chatbox" />
+
+        {/* Navigation Buttons */}
+        <div className="chat-nav">
+          <button onClick={() => handleNavigate("Dashboard")}>Dashboard</button>
+          <button onClick={() => handleNavigate("My Videos")}>My Videos</button>
+          <button onClick={() => handleNavigate("Schedule")}>Schedule</button>
+          <button onClick={() => handleNavigate("Finances")}>Finances</button>
+        </div>
 
         <div className="chat-container">
           {/* LEFT LIST */}
