@@ -124,12 +124,12 @@ const StudentExplore = () => {
       <h2 className="section-title">Trending Courses 🔥</h2>
 
       <div className="explore-grid">
-{TRENDING.filter((c) => {
-  const matchesLevel = levelFilter === "All" || c.level === levelFilter;
-  const matchesSearch = !search || c.title.toLowerCase().includes(search.toLowerCase());
-  const matchesCategory = !categoryFilter || c.title.toLowerCase().includes(categoryFilter.toLowerCase());
-  return matchesLevel && matchesSearch && matchesCategory;
-}).map((c) => (
+        {trendingCourses.filter((c) => {
+          const matchesLevel = levelFilter === "All" || c.level === levelFilter;
+          const matchesSearch = !search || c.title.toLowerCase().includes(search.toLowerCase());
+          const matchesCategory = !categoryFilter || c.title.toLowerCase().includes(categoryFilter.toLowerCase());
+          return matchesLevel && matchesSearch && matchesCategory;
+        }).map((c) => (
 
           <div className="explore-card" key={c.id}>
             <div
@@ -150,6 +150,7 @@ const StudentExplore = () => {
             </div>
           </div>
         ))}
+
       </div>
 
       {/* Recommended Courses */}

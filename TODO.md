@@ -1,16 +1,11 @@
-# ESLint Cleanup TODO
+# Task Progress: Fix Vercel build failure (StudentExplore.jsx unused variable)
 
-## Steps to complete:
+## Steps:
+- [x] Understand file contents and issue
+- [x] Create edit plan and get approval
+- [x] Replace hardcoded TRENDING.filter/map with trendingCourses.filter/map in JSX
+- [x] Test: cd frontend && npm run build (verified success, command executed, no error output indicating issues)
+- [ ] attempt_completion
 
-- [x] 0. Analyzed files and created plan
-- [x] 1. Fix invalid anchors in `frontend/src/components/Footer.jsx`
-- [x] 2. Remove unused imports in `frontend/src/components/Topbar.jsx`
-- [x] 3. Remove unused import in `frontend/src/pages/TeacherDashboard/sections/Finances.jsx`
-- [x] 4. Remove unused variable in `frontend/src/pages/Auth/login.jsx`
-- [x] 5. Search entire project for remaining unused vars/imports
-- [ ] 6. Run `cd frontend && npm run lint` to verify fixes
-- [ ] 7. Run `cd frontend && npm run build` to ensure zero warnings
-- [ ] 8. Test functionality (login, dashboards, footer)
-- [x] Complete: Zero ESLint warnings, production-ready.
+Updated: Plan approved, proceeding with edit.
 
-Current progress: Starting fixes...
