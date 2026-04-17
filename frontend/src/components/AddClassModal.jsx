@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import api from '../services/api';
 import "./AddClassModal.css";
 
 const CATEGORIES = [
@@ -68,20 +69,12 @@ export default function AddClassModal({ open, onClose, onCreated }) {
       if (form.thumbnailFile) fd.append("image", form.thumbnailFile);
       else if (form.imageUrl) fd.append("imageUrl", form.imageUrl);
 
-      const token = localStorage.getItem("token");
-  const res = await api.post('/api/teacher/classes', {
-        method: "POST",
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
-        body: fd,
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to create class");
+      await api.post('/api/teacher/classes', fd);
       setForm(initial);
-      onCreated?.(data.class || data);
+      onCreated?.();
       onClose?.();
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || err.message);
     } finally {
       setLoading(false);
     }

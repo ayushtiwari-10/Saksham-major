@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import api from '../services/api';
 import './FloatingAIChatbot.css';
 
 const FloatingAIChatbot = () => {
@@ -20,20 +21,8 @@ const FloatingAIChatbot = () => {
     setIsLoading(true);
 
     try {
-      const response = await api.post('/api/ai/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: input }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      const botMessage = { sender: 'bot', text: data.response };
+      const res = await api.post('/api/ai/chat', { message: input });
+      const botMessage = { sender: 'bot', text: res.data.response };
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
@@ -102,3 +91,4 @@ const FloatingAIChatbot = () => {
 };
 
 export default FloatingAIChatbot;
+

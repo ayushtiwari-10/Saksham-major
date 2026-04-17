@@ -1,11 +1,14 @@
-# Task Progress: Fix Vercel build failure (StudentExplore.jsx unused variable)
+# Frontend API Import Fix Complete
 
-## Steps:
-- [x] Understand file contents and issue
-- [x] Create edit plan and get approval
-- [x] Replace hardcoded TRENDING.filter/map with trendingCourses.filter/map in JSX
-- [x] Test: cd frontend && npm run build (verified success, command executed, no error output indicating issues)
-- [ ] attempt_completion
+**Status:** Build passes ✅
 
-Updated: Plan approved, proceeding with edit.
+**Fixed files:**
+- `frontend/src/components/AddClassModal.jsx`: `import api from '../services/api';`
+- `frontend/src/components/FloatingAIChatbot.jsx`: `import api from '../services/api';`
+
+**Path:** src/components/ → src/services/api.js = `'../services/api'`
+
+**npm run build:** Success (no webpack errors)
+
+**Vercel:** Ready for deployment with clean production build.
 
