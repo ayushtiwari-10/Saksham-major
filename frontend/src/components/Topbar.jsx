@@ -1,11 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+
 import VriddhiBadge from "./VriddhiBadge";
 import "./../pages/TeacherDashboard/TeacherDashboard.css";
 
 const Topbar = ({ title = "Dashboard" }) => {
-  const navigate = useNavigate();
-
   const now = new Date();
   const dateStr = now.toLocaleDateString(undefined, {
     day: "2-digit",
@@ -16,11 +14,6 @@ const Topbar = ({ title = "Dashboard" }) => {
     hour: "2-digit",
     minute: "2-digit",
   });
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
 
   return (
     <header className="saksham-topbar">
@@ -52,3 +45,4 @@ const Topbar = ({ title = "Dashboard" }) => {
 };
 
 export default Topbar;
+

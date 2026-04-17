@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import Topbar from "../../../components/Topbar";
 import { authService } from "../../../services/auth.service";
 import "./Finances.css";

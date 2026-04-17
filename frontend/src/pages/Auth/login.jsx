@@ -29,7 +29,6 @@ const Login = () => {
     const result = await login(formData);
     if (result.success) {
       setNotification({ type: 'success', message: 'Login successful!' });
-      const user = result.user;
       if (user && user.role === "teacher") {
         navigate("/teacher/dashboard");
       } else {

@@ -38,7 +38,7 @@ const Interests = () => {
     const selectedTitles = selected.map(id => categories.find(cat => cat.id === id).title);
 
     try {
-      const res = await API.patch('/user/interests', { interests: selectedTitles });
+      await API.patch('/user/interests', { interests: selectedTitles });
       setUser({ ...(user || {}), interests: selectedTitles });
       navigate("/student/dashboard");
     } catch (error) {

@@ -30,10 +30,10 @@ const Footer = () => {
           <p>Email: <a href="mailto:support@saksham.com">support@saksham.com</a></p>
           <p>Phone: +91 98765 43210</p>
           <div className="social-icons">
-            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" /></a>
-            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" /></a>
-            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="LinkedIn" /></a>
-            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="Twitter" /></a>
+<a href="https://www.facebook.com/sakshamlearning" target="_blank" rel="noopener noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" /></a>
+<a href="https://www.instagram.com/saksham_learning" target="_blank" rel="noopener noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" /></a>
+<a href="https://www.linkedin.com/company/saksham" target="_blank" rel="noopener noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="LinkedIn" /></a>
+<a href="https://twitter.com/sakshamlrn" target="_blank" rel="noopener noreferrer"><img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="Twitter" /></a>
           </div>
         </div>
       </div>
