@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     const uri = process.env.MONGO_URI;
+    console.log('MONGO_URI loaded:', uri ? 'YES (length:' + uri.length + ')' : 'NO');
     if (!uri) {
       throw new Error('MONGO_URI environment variable is required');
     }

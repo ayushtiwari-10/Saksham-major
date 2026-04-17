@@ -36,4 +36,16 @@ app.use("/api/recommendations", recommendationRoutes);
 // health
 app.get("/health", (req, res) => res.send({ ok: true }));
 
+// 404 handler
+app.use((req, res) => {
+  console.error(`404 - Route not found: ${req.method} ${req.originalUrl}`);
+  res.status(404).json({ error: 'Route not found' });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Server error:', err.stack);
+  res.status(500).json({ error: 'Internal server error' });
+});
+
 module.exports = app;

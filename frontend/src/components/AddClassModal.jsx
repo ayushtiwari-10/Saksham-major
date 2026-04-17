@@ -69,7 +69,7 @@ export default function AddClassModal({ open, onClose, onCreated }) {
       else if (form.imageUrl) fd.append("imageUrl", form.imageUrl);
 
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/teacher/classes", {
+  const res = await api.post('/api/teacher/classes', {
         method: "POST",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: fd,

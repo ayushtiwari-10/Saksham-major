@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const res = await API.get('/auth/me');
+  const res = await API.get('/api/auth/me');
       setUser(res.data);
     } catch (err) {
       console.error('Failed to fetch user', err);
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const res = await API.post('/auth/login', credentials);
+  const res = await API.post('/api/auth/login', credentials);
       const { token, user } = res.data;
       localStorage.setItem('token', token);
       API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (userData) => {
     try {
-      const res = await API.post('/auth/signup', userData);
+  const res = await API.post('/api/auth/signup', userData);
       const { token, user } = res.data;
       localStorage.setItem('token', token);
       API.defaults.headers.common['Authorization'] = `Bearer ${token}`;

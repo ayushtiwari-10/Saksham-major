@@ -33,7 +33,7 @@ const ProfileUploader = ({ currentUrl, onSavedUrl }) => {
       setUploading(true);
       setProgress(0);
       const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
-      const resp = await axios.post(url, form, {
+      const resp = await api.post('/api/cloudinary/upload', form, {
         onUploadProgress: (evt) => {
           const pct = Math.round((evt.loaded * 100) / evt.total);
           setProgress(pct);
@@ -45,7 +45,7 @@ const ProfileUploader = ({ currentUrl, onSavedUrl }) => {
       // send to backend to save to user profile
       try {
         // example endpoint - change to your real backend path & include auth
-        await axios.post("/api/users/profile-photo", { imageUrl });
+        await api.patch('/api/user/me', { profilePhoto: imageUrl });
         toast.success("Profile saved ✅");
         onSavedUrl && onSavedUrl(imageUrl);
       } catch (err) {
